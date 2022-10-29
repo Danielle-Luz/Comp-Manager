@@ -1,6 +1,5 @@
 .background {
   background-image: url("../../assets/imgs/background.svg");
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
-  background-size: cover;
 }

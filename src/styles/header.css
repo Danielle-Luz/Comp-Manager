@@ -3,12 +3,16 @@
 }
 
 .header {
+  background-color: var(--color-white);
   border: 1px solid var(--color-opacity-2);
-  row-gap: 2.375rem;
   padding: 1rem;
   position: sticky;
   top: 0;
   transition: box-shadow 1s;
+}
+
+.header-content {
+  row-gap: 2.375rem;
 }
 
 .header-shadow {
@@ -47,20 +51,20 @@
 }
 
 @media (min-width: 580px) {
-  .header {
+  .header-content {
     box-shadow: none;
     flex-direction: row;
   }
 
-  .header .d-none {
+  .header-content .d-none {
     display: flex;
   }
 
-  .header .hamburguer-menu {
+  .header-content .hamburguer-menu {
     display: none;
   }  
 
-  .header .button-group {
+  .header-content .button-group {
     display: flex;
   }
 }
