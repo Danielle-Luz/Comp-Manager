@@ -1,5 +1,5 @@
-1. Criar estrutura de pastas
-2. Criar arquivos básicos
+1. Criar estrutura de pastas - ok
+2. Criar arquivos básicos - ok
 3. Checar documentação da API
 4. Testar requisições para a API no insomnia
 5. Fazer CSS (Mobile first)

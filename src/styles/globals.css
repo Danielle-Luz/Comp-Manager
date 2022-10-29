@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
 :root {
   --color-brand-1: #4200FF;
@@ -22,7 +22,21 @@
   --font-size-7: 1rem;
 
   --line-height-1: 2.625rem;
+
+  --weight-1: 700;
+  --weight-2: 400;
 }
+
+/*
+ --font-size-1: 40px;
+  --font-size-2: 30px;
+  --font-size-3: 28px;
+  --font-size-4: 22px;
+  --font-size-5: 20px;
+  --font-size-6: 18px;
+  --font-size-7: 16px;
+
+*/
 
 .container {
   max-width: 1160px;
