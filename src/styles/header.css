@@ -4,11 +4,15 @@
 
 .header {
   border: 1px solid var(--color-opacity-2);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
   row-gap: 2.375rem;
   padding: 1rem;
   position: sticky;
   top: 0;
+  transition: box-shadow 1s;
+}
+
+.header-shadow {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
 }
 
 .hamburguer-menu {
@@ -42,25 +46,19 @@
   position: absolute;
 }
 
-
-@keyframes translate-1 {
-  0% {
-
-  }
-
-  100% {
-
-  }
-}
-
 @media (min-width: 580px) {
-  .header .hamburguer-menu {
-    display: none;
-  }
-
   .header {
+    box-shadow: none;
     flex-direction: row;
   }
+
+  .header .d-none {
+    display: flex;
+  }
+
+  .header .hamburguer-menu {
+    display: none;
+  }  
 
   .header .button-group {
     display: flex;
