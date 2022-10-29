@@ -1,0 +1,50 @@
+/* TITLES */
+.title-1 {
+  font-size: var(--font-size-1);
+  font-weight: var(--weight-1);
+  font-family: var(--font-family-2);
+}
+
+.title-2 {
+  font-size: var(--font-size-2);
+  font-weight: var(--weight-1);
+  font-family: var(--font-family-1);
+}
+
+.title-3 {
+  font-size: var(--font-size-3);
+  font-weight: var(--weight-1);
+  font-family: var(--font-family-2);
+}
+
+.title-4 {
+  font-size: var(--font-size-5);
+  font-weight: var(--weight-1);
+  font-family: var(--font-family-1);
+}
+
+/* TEXTS */
+.text-1 {
+  font-size: var(--font-size-4);
+  font-weight: var(--weight-2);
+  font-family: var(--font-family-1);
+}
+
+.text-2 {
+  font-size: var(--font-size-4);
+  font-weight: var(--weight-2);
+  font-family: var(--font-family-1);
+}
+
+.text-3 {
+  font-size: var(--font-size-5);
+  font-weight: var(--weight-2);
+  font-family: var(--font-family-1);
+}
+
+.text-4 {
+  font-size: var(--font-size-6);
+  font-weight: var(--weight-2);
+  font-family: var(--font-family-1);
+}
+
