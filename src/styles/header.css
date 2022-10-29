@@ -12,13 +12,14 @@
 }
 
 .hamburguer-menu {
-  row-gap: 0.625rem;
-  width: 24px;
+  row-gap: 0.3rem;
+  width: 100%;
 }
 
 .hamburguer-menu .trace {
-  height: 5px;
-  width: 100%;
+  background-color: var(--color-grey-1);
+  border-radius: 1rem;
+  height: 3px;
 }
 
 @media (min-width: 800px) {

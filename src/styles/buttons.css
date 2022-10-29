@@ -1,3 +1,7 @@
+button {
+  padding: 0;
+}
+
 .button {
   font-size: var(--font-size-6);
   font-weight: var(--weight-1);
