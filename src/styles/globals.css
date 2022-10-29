@@ -10,6 +10,8 @@
   --color-white: #FFFFFF;
   --color-opacity-1: #00000080;
   --color-opacity-2: rgba(0, 0, 0, 0.1);
+  --color-opacity-2: rgba(0, 0, 0, 0.5);
+  --color-opacity-3: rgba(255, 255, 255, 0.95);
 
   --font-family-1: 'Inter', sans-serif;
   --font-family-2: 'Poppins', sans-serif;
