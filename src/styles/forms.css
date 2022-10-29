@@ -1,3 +1,9 @@
+.background {
+  background-image: url("../assets/imgs/background.svg");
+  background-position: top;
+  background-repeat: no-repeat;
+}
+
 .form-1 {
   background-color: var(--color-opacity-4);
   max-width: 422px;
