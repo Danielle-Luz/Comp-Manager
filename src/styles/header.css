@@ -9,6 +9,7 @@
   position: sticky;
   top: 0;
   transition: box-shadow 1s;
+  z-index: 10;
 }
 
 .header-content {
