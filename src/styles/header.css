@@ -22,8 +22,8 @@
   height: 3px;
 }
 
-@media (min-width: 800px) {
-  .header .close-button {
+@media (min-width: 580px) {
+  .header .hamburguer-menu {
     display: none;
   }
 
