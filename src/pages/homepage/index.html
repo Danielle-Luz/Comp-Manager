@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <!-- STYLES -->
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/flex.css">
+    <link rel="stylesheet" href="../../styles/media.css">
+    <link rel="stylesheet" href="../../styles/texts.css">
+    <link rel="stylesheet" href="../../styles/globals.css">
+    <link rel="stylesheet" href="../../styles/sizes.css">
+    <link rel="stylesheet" href="../../styles/cards.css">
+    <link rel="stylesheet" href="index.css">
+    <!-- COMPONENTS -->
+    <link rel="stylesheet" href="../../styles/buttons.css">
+    <link rel="stylesheet" href="../../styles/forms.css">
+    <link rel="stylesheet" href="../../styles/header.css">
+  </head>
+  <body class="full-width">
+    <header class="align-center d-flex full-width header justify-center">
+      <div class="align-center container d-flex flex-column header-content justify-between">
+        <div class="d-flex full-width justify-between">
+          <img class="logo" src="../../assets/imgs/logo.svg" alt="logo">
+          <button class="button-icon">
+            <div class="d-flex flex-column hamburguer-menu">
+              <div class="trace"></div>
+              <div class="trace"></div>
+              <div class="trace"></div>
+            </div>
+          </button>
+        </div>
+        <div class="align-center d-flex justify-center d-none" id="options-header">
+          <div class="button-group d-flex">
+            <a class="button button-outline text-4" href="index.html">Login</a>
+            <a class="button button-brand text-4" href="../../pages/signup/index.html">Cadastro</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="align-center d-flex full-width full-viewport justify-center">
+      <main class="container d-flex full-width justify-center">
+        <img class="d-none full-width half-container side-img" src="../../assets/imgs/background.svg">
+        <div class="half-container full-width organizations-wrapper">
+          <div class="organizations-select">
+            <h2 class="text-3">Selecionar Setor</h2>
+            <button class="button-icon" aria-label="Deslizar seção de organizações para baixo">
+              <img src="../../assets/imgs/arrow.svg" alt="seta apontando para baixo">
+            </button>
+          </div>
+          
+          <section class="full-width organizations">
+            <div class="available-sectors d-flex d-none full-width flex-column">
+              <span class="text-4">Categoria</span>
+              <span class="text-4">Categoria</span>
+            </div>
+            <ul class="d-flex organizations-list">
+              <li class="d-flex flex-column full-width justify-between organization-card">
+                <h3 class="title-4">Empresa</h3>
+                <div class="d-flex details flex-column">
+                  <span class="text-4">10 horas</span>
+                  <span class="button-outline text-4">Setor</span>
+                </div>
+              </li>
+              <li class="d-flex flex-column full-width justify-between organization-card">
+                <h3 class="title-4">Empresa</h3>
+                <div class="d-flex details flex-column">
+                  <span class="text-4">10 horas</span>
+                  <span class="button-outline text-4">Setor</span>
+                </div>
+              </li>
+              <li class="d-flex flex-column full-width justify-between organization-card">
+                <h3 class="title-4">Empresa</h3>
+                <div class="d-flex details flex-column">
+                  <span class="text-4">10 horas</span>
+                  <span class="button-outline text-4">Setor</span>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

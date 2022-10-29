@@ -1,0 +1,8 @@
+.organization-card {
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-brand-1);
+  flex-shrink: 0;
+  height: 211px;
+  max-width: 242px;
+  padding: 0.8125rem 0.9375rem;
+}

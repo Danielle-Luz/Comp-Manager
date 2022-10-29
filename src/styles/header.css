@@ -1,5 +1,5 @@
 .logo {
-  width: 203px;
+  width: 142px;
 }
 
 .header {
@@ -51,6 +51,10 @@
 }
 
 @media (min-width: 580px) {
+  .logo {
+    width: 203px;
+  }
+
   .header-content {
     box-shadow: none;
     flex-direction: row;
