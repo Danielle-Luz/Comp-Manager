@@ -1,16 +1,16 @@
 .form-1 {
   background-color: var(--color-opacity-4);
   max-width: 422px;
-  padding: 2.625rem;
+  padding: 2.625rem 1rem;
   row-gap: 0.8125rem;
   width: 100%;
 }
 
-.form .title-1 {
+.form-1 .title-1 {
   margin-bottom: 8px;
 }
 
-.form .text-5 {
+.form-1 .text-5 {
   margin-bottom: 1rem;
 }
 
@@ -23,10 +23,11 @@
   border-radius: 0;
   font-size: var(--font-size-6);
   outline: none;
-  padding: 17px;
+  padding: 0.625rem;
 }
 
-.input-1::placeholder {
+.input-1::placeholder,
+select {
   color: var(--color-opacity-3);
 }
 
@@ -34,12 +35,16 @@
   border-color: var(--color-brand-1);
 }
 
-@media (min-width: 800px) {
-  .form .title-1 {
+@media (min-width: 440px) {
+  .form-1 {
+    padding: 2.625rem
+  }
+
+  .form-1 .title-1 {
     margin-bottom: 0.6875rem;
   }
 
-  .form .text-5 {
+  .form-1 .text-5 {
     margin-bottom: 1.5rem;
   }
 }
