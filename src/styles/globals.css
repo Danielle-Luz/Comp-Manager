@@ -40,6 +40,10 @@
 
 */
 
+body {
+  position: relative;
+}
+
 .container {
   max-width: 1160px;
   width: 100%;
