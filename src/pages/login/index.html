@@ -24,17 +24,17 @@
         <div class="d-flex full-width justify-between">
           <img class="logo" src="../../assets/imgs/logo.svg" alt="logo">
           <button class="button-icon">
-            <div class="d-flex flex-column hamburguer-menu">
+            <div class="d-flex flex-column hamburguer-menu" aria-label="botão para expandir menu dropdown">
               <div class="trace"></div>
               <div class="trace"></div>
               <div class="trace"></div>
             </div>
           </button>
         </div>
-        <div class="align-center d-flex justify-center d-none" id="options-header">
+        <div class="align-center d-flex justify-center d-none" id="options-header" aria-label="menu dropdown">
           <div class="button-group d-flex">
-            <a class="button button-outline text-4" href="index.html">Login</a>
-            <a class="button button-brand text-4" href="../../pages/signup/index.html">Cadastro</a>
+            <a class="button button-outline text-4" href="index.html" role="button">Login</a>
+            <a class="button button-brand text-4" href="../../pages/signup/index.html" role="button">Cadastro</a>
           </div>
         </div>
       </div>
@@ -43,12 +43,14 @@
       <form class="d-flex flex-column form-1">
         <h1 class="title-1">Login</h1>
         <p class="text-4">Preencha os campos para realizar login</p>
-        <input class="input-1" type="email" autocomplete="off" placeholder="Seu email">
-        <input class="input-1" type="password" autocomplete="off" placeholder="Sua senha">
+        <label for="email" hidden>E-mail</label>
+        <input class="input-1" id="email" type="email" autocomplete="off" placeholder="Seu email">
+        <label for="password" hidden>Senha</label>
+        <input class="input-1" id="password" type="password" autocomplete="off" placeholder="Sua senha">
         <div class="button-group d-flex flex-column">
           <button class="button button-brand">Login</button>
           <span class="text-4">Ou</span>
-          <a class="button button-outline text-4" href="../../pages/signup/index.html">Cadastre-se</a>
+          <a class="button button-outline text-4" href="../../pages/signup/index.html" role="button">Cadastre-se</a>
         </div>
       </form>
     </div>
