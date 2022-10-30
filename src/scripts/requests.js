@@ -1,5 +1,11 @@
 const baseUrl = "http://localhost:6278";
 
+export function clearToken () {
+  if (localStorage.getItem("token")) {
+    localStorage.removeItem("token");
+  }
+}
+
 async function sendData (data) {
   const request = await fetch(`${baseUrl}/auth/register`, {
     method: "POST",
@@ -14,7 +20,7 @@ async function sendData (data) {
   return response;
 }
 
-async function createUser (data) {
+export async function createUser (data) {
   const response = await sendData(data);
 }
 
