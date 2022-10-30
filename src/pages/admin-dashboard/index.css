@@ -1,5 +1,5 @@
 main {
-  margin-top: 6.5rem;
+  margin-block: 6.5rem;
 }
 
 .add-button {
@@ -15,12 +15,9 @@ main {
   left: 10px;
 }
 
-section.cards-container {
-}
-
 ul.cards-container {
   gap: 1.75rem 5.75rem;
-  height: 385px;
+  height: 365px;
   margin-top: 0.625rem;
   overflow-y: auto;
 }
@@ -45,5 +42,11 @@ ul.cards-container::-webkit-scrollbar-thumb {
 }
 
 .button-group {
-  gap: 10px;
+  gap: 0.625rem;
+}
+
+.created-users .title-2 {
+  margin-bottom: 1rem;
+  margin-top: 4.3125rem;
+  text-align: center;
 }
