@@ -30,6 +30,7 @@
 
 .select-1 {
   border-radius: 0.9375rem;
+  color: var(--color-grey-1);
   padding: 0.20rem 2.0625rem;
 }
 
