@@ -23,7 +23,7 @@
       <div class="align-center container d-flex flex-column header-content justify-between">
         <div class="d-flex full-width justify-between">
           <img class="logo" src="../../assets/imgs/logo.svg" alt="logo">
-          <button class="button-icon">
+          <button class="button-icon" aria-label="botão para expandir menu dropdown">
             <div class="d-flex flex-column hamburguer-menu">
               <div class="trace"></div>
               <div class="trace"></div>
@@ -31,27 +31,39 @@
             </div>
           </button>
         </div>
-        <div class="align-center d-flex justify-center d-none" id="options-header">
+        <div class="align-center d-flex justify-center d-none" id="options-header" aria-label="menu dropdown">
           <div class="button-group d-flex">
-            <a class="button button-outline text-4" href="../../pages/login/index.html">Login</a>
-            <a class="button button-brand text-4" href="index.html">Cadastro</a>
+            <a class="button button-outline text-4" href="../../pages/login/index.html" role="button">Login</a>
+            <a class="button button-brand text-4" href="index.html" role="button">Cadastro</a>
           </div>
         </div>
-
       </div>
     </header>
     <div class="align-center background d-flex full-viewport full-width justify-center">
       <form class="d-flex flex-column form-1">
         <h1 class="title-1">Cadastre-se</h1>
-        <input class="input-1" type="text" autocomplete="off" placeholder="Seu nome">
-        <input class="input-1" type="email" autocomplete="off" placeholder="Seu email">
-        <input class="input-1" type="password" autocomplete="off" placeholder="Sua senha">
-        <select class="input-1" name="">
+        <label for="username" hidden>Nome de usuário</label>
+        <input class="input-1" type="text" id="username" autocomplete="off" placeholder="Seu nome" required>
+        <label for="email" hidden>E-mail</label>
+        <input class="input-1" id="email" type="email" autocomplete="off" placeholder="Seu email" required>
+        <label for="password" hidden>Senha</label>
+        <input class="input-1" id="password" type="password" autocomplete="off" placeholder="Sua senha" required>
+        <label for="professional_level" hidden>Nível profissional</label>
+        <select class="input-1" id="professional_level">
           <option disabled selected>Nível profissional</option>
+          <option>Júnior</option>
+          <option>Pleno</option>
+          <option>Sênior</option>
+        </select>
+        <label for="kind_of_work" hidden>Tipo de trabalho</label>
+        <select class="input-1" id="kind_of_work">
+          <option disabled selected>Tipo de trabalho</option>
+          <option>Home office</option>
+          <option>Presencial</option>
         </select>
         <div class="button-group d-flex flex-column">
           <button class="button button-brand">Cadastre-se</button>
-          <a class="button button-outline text-4" href="../../pages/login/index.html">Retornar</a>
+          <a class="button button-outline text-4" href="../../pages/login/index.html" role="button">Retornar</a>
         </div>
       </form>
     </div>
