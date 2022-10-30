@@ -35,6 +35,11 @@ ul.cards-container::-webkit-scrollbar-thumb {
   background-color: var(--color-brand-1);
 }
 
+.title-1 {
+  line-height: 150%;
+  text-align: center;
+}
+
 .organization-card {
   row-gap: 0.5625rem;
   max-width: 489px;
