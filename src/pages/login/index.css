@@ -6,3 +6,7 @@
 .form-1 p.text-4 {
   margin-bottom: 1rem;
 }
+
+.form-1 span.text-4 {
+  margin-bottom: 0;
+}
