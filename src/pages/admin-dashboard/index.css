@@ -1,0 +1,80 @@
+main {
+  margin-block: 2rem;
+  padding: 30px;
+}
+
+.department-header {
+  gap: 1.25rem;
+}
+
+.add-button {
+  box-sizing: content-box;
+  padding-inline: 50px;
+  position: relative;
+}
+
+.add-button::before {
+  content: url("../../assets/imgs/plus.svg");
+  display: block;
+  position: absolute;
+  left: 10px;
+}
+
+ul.cards-container {
+  gap: 1.75rem 5.75rem;
+  height: 365px;
+  margin-top: 0.625rem;
+  overflow-y: auto;
+}
+
+ul.cards-container::-webkit-scrollbar {
+  width: 9px;
+}
+
+ul.cards-container::-webkit-scrollbar-thumb {
+  background-color: var(--color-brand-1);
+}
+
+.title-1 {
+  line-height: 150%;
+  text-align: center;
+}
+
+.organization-card {
+  row-gap: 0.5625rem;
+  max-width: 489px;
+  height: fit-content;
+  padding: 1.3125rem 1.8125rem;
+  width: 100%;
+}
+
+.button-icon {
+  width: fit-content;
+}
+
+.button-group {
+  gap: 0.625rem;
+}
+
+.created-users .title-2 {
+  margin-bottom: 1rem;
+  margin-top: 4.3125rem;
+  text-align: center;
+}
+
+@media (min-width: 800px) {
+  main {
+    margin-block: 4.5rem;
+  }
+}
+
+@media (min-width: 1160px) {
+  .department-header {
+    flex-direction: row;
+  }
+
+  ul.cards-container {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}

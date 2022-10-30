@@ -13,3 +13,7 @@
 .fit-height {
   height: fit-content;
 }
+
+.fit-width {
+  width: fit-content;
+}
