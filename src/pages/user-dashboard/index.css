@@ -7,25 +7,33 @@ body>div {
   padding-inline: 20px;
 }
 
-.cards-container {
- padding: 3.625rem;
- gap: 0.8125rem 3.375rem; 
- max-height: 387px;
- overflow-y: auto;
+.company-info {
+  margin-top: 3.4375rem;
 }
 
-.cards-container::-webkit-scrollbar {
+div.cards-container {
+  height: 387px;
+}  
+
+ul.cards-container {
+ padding: 3.625rem; 
+ gap: 0.8125rem 3.375rem;
+ max-height: 387px; 
+ overflow-y: auto;
+} 
+
+ul.cards-container::-webkit-scrollbar {
   padding-top: 5px;
   width: 5px;
-}
+}  
 
-.cards-container::-webkit-scrollbar-thumb {
+ul.cards-container::-webkit-scrollbar-thumb {
   background-color: var(--color-brand-1);
   border-radius: 0.25rem;
-}
+}  
 
-.cards-title {
-  margin-top: 3.4375rem;
+.message-wrapper {
+  border: 1px solid var(--color-grey-2);
 }
 
 .email-info {
