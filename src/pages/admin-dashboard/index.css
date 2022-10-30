@@ -1,5 +1,10 @@
 main {
-  margin-block: 6.5rem;
+  margin-block: 2rem;
+  padding: 30px;
+}
+
+.department-header {
+  gap: 1.25rem;
 }
 
 .add-button {
@@ -32,9 +37,10 @@ ul.cards-container::-webkit-scrollbar-thumb {
 
 .organization-card {
   row-gap: 0.5625rem;
-  min-width: 489px;
+  max-width: 489px;
   height: fit-content;
   padding: 1.3125rem 1.8125rem;
+  width: 100%;
 }
 
 .button-icon {
@@ -49,4 +55,21 @@ ul.cards-container::-webkit-scrollbar-thumb {
   margin-bottom: 1rem;
   margin-top: 4.3125rem;
   text-align: center;
+}
+
+@media (min-width: 800px) {
+  main {
+    margin-block: 4.5rem;
+  }
+}
+
+@media (min-width: 1160px) {
+  .department-header {
+    flex-direction: row;
+  }
+
+  ul.cards-container {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
 }

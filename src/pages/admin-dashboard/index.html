@@ -24,24 +24,19 @@
     <header class="align-center d-flex full-width header justify-center">
       <div class="align-center container d-flex flex-column header-content justify-between">
         <img class="logo" src="../../assets/imgs/logo.svg" alt="logo">
-        <div class="align-center d-flex justify-center d-none" id="options-header">
-          <div class="button-group d-flex">
-            <a class="button button-outline text-4" href="../../pages/login/index.html">Logout</a>
-          </div>
-        </div>
+        <a class="button button-outline text-4" href="../../pages/login/index.html">Logout</a>
       </div>
     </header>
     <main class="align-center d-flex flex-column justify-center">
-
       <section class="container">
-        <div class="align-center d-flex full-width justify-between">
+        <div class="align-center d-flex flex-column full-width justify-between department-header">
           <h1 class="title-2">Departamentos</h1>
           <select class="text-4 select-1" id="company-names">
             <option class="text-4" disabled selected>Selecionar empresa</option>
           </select>
           <button class="add-button button button-brand d-flex text-4" id="create-company">Criar</button>
         </div>
-        <ul class="cards-container d-flex flex-wrap" id="company-list">
+        <ul class="align-center cards-container d-flex flex-column" id="company-list">
           <li class="d-flex flex-column full-width organization-card">
             <h3 class="title-4">Empresa</h3>
             <span class="text-4">10 horas</span>
@@ -140,10 +135,9 @@
           </li>
         </ul>
       </section>
-
       <section class="container created-users">
         <h1 class="title-2">Usuários cadastrados</h1>
-        <ul class="cards-container container d-flex flex-wrap">
+        <ul class="align-center cards-container d-flex flex-column">
           <li class="d-flex flex-column full-width organization-card">
             <h3 class="title-4">Empresa</h3>
             <span class="text-4">10 horas</span>
