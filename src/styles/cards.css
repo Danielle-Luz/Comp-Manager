@@ -1,9 +1,9 @@
 .cards-title {
   background-color: var(--color-brand-1);
-  color: var(--color-white);
-  padding-block: 0.9rem;
-  text-align: center;
   box-sizing: content-box;
+  color: var(--color-white);
+  padding: 0.9rem;
+  text-align: center;
 }
 
 .cards-container {
@@ -24,7 +24,16 @@
   background-color: var(--color-white);
   border: 1px solid var(--color-brand-1);
   gap: 0.875rem;
-  min-width: 300px;
-  height: 76px;
+  width: 300px;
+  max-width: 100%;
+  min-height: 76px;
   padding: 0.75rem 1.5rem;
+}
+
+.cards-container::-webkit-scrollbar {
+  width: 9px;
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background-color: var(--color-brand-1);
 }
