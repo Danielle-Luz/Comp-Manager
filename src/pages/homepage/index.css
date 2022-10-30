@@ -18,23 +18,16 @@ main.container {
   object-fit: cover;
 }
 
-.organizations-select {
-  background-color: var(--color-brand-1);
-  box-sizing: content-box;
-  color: var(--color-white);
-  padding-block: 0.9rem;
-  text-align: center;
+.cards-title {
   position: relative;
 }
 
-.organizations {
-  background-color: var(--color-grey-3);
+.cards-container  {
   box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
   position: relative;
-  padding: 0.625rem;
 }
 
-.organizations-select .button-icon {
+.cards-title .button-icon {
   position: absolute;
   right: 10px;
   top: 8px;
@@ -89,7 +82,7 @@ main.container {
     width: 5px;
   }
 
-  .organizations {
+  .cards-container {
     height: 100%;
   }
 

@@ -23,6 +23,12 @@
   font-family: var(--font-family-1);
 }
 
+.title-5 {
+  font-size: var(--font-size-6);
+  font-weight: var(--weight-1);
+  font-family: var(--font-family-1);
+}
+
 /* TEXTS */
 .text-1 {
   font-size: var(--font-size-4);
