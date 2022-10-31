@@ -9,9 +9,11 @@ export function getFormData (id, foo) {
     let fieldsData = {};
 
     fields.forEach(({id, value}) => {
-      fieldsData = {
-        ...fieldsData,
-        [id]: value
+      if (value) {
+        fieldsData = {
+          ...fieldsData,
+          [id]: value
+        }
       }
     });
 
