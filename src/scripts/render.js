@@ -1,5 +1,5 @@
 export function renderAllCards (list, containerId, createCardFunction) {
-  const container = document.getElementById(containerId);
+  const container = document.querySelector(containerId);
 
   container.innerHTML = "";
 
