@@ -28,3 +28,9 @@ export function createCompanyCard ({name, opening_hours, sectors:{description}})
   return card;
 }
 
+export function createCompanySelectOption ({description}) {
+  const option = `<span class="text-4">${description}</span>`;
+
+  return option;
+}
+
