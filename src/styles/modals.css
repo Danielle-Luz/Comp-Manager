@@ -1,0 +1,23 @@
+.modal-wrapper {
+  background-color: var(--color-opacity-3);
+  position: fixed;
+  z-index: 100;
+}
+
+.modal-wrapper .button-icon {
+  width: 20px;
+}
+
+.modal {
+  background-color: var(--color-white);
+  padding: 2rem 2.5rem;
+}
+
+.modal-content {
+  min-width: 423px;
+  padding: 0;
+}
+
+.modal-content .title-2 {
+  margin-bottom: 1.25rem;
+}

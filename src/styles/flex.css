@@ -21,3 +21,7 @@
 .flex-wrap {
   flex-wrap: wrap;
 }
+
+.self-end {
+  align-self: flex-end;
+}
