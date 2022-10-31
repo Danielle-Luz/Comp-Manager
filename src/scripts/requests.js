@@ -61,8 +61,11 @@ export async function login (data) {
 
     localStorage.setItem("is_admin", permission.is_admin);
 
-    if ()
-
+    if (permission.is_admin) {
+      window.location.assign("../admin-dashboard/index.html");
+    } else {
+      window.location.assign("../user-dashboard/index.html");
+    }
   } else {
     toast = createToast("E-mail ou senha inválidos", "alert");
     
