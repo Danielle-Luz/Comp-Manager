@@ -87,7 +87,7 @@ export async function login (data) {
   }
 }
 
-async function getAllCompanies () {
+export async function getAllCompanies () {
   const request = await fetch(`${baseUrl}/companies`, {
     method: "GET",
     headers: {
