@@ -52,12 +52,10 @@ export async function createUser (data) {
 export async function login (data) {
   let toast;
   const response = await sendData("login", data);
-  const token = response.json();
+  const token = (await response.json()).token;
 
   if (response.ok) {
     localStorage.setItem("token", token);
-
-    console.log("foi");
   } else {
     toast = createToast("E-mail ou senha inválidos", "alert");
     
