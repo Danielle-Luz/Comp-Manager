@@ -5,7 +5,7 @@ export function createToast (message) {
   articleToast.classList = "full-width toast toast-sucess";
   articleMessage.classList = "text-4";
 
-  articleMessage.innerText = message;
+  articleMessage.innerHTML = message;
 
   articleToast.appendChild(articleMessage);
 

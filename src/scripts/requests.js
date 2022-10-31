@@ -1,3 +1,5 @@
+import { createToast } from "./popups.js";
+
 const baseUrl = "http://localhost:6278";
 
 export function clearToken () {
@@ -22,6 +24,7 @@ export async function createUser (data) {
   const response = await sendData(data);
 
   if (response.ok) {
+    const toast = createToast("Criação de usuário<br>bem-sucedida");
   }
 }
 
