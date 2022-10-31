@@ -7,7 +7,7 @@ const sectors = await getAllSectors();
 
 renderAllCards(companies, ".organizations-list", createCompanyCard);
 
-renderAllCards(sectors, "#sectors", createCompanySelectOption);
+renderAllCards(sectors, ".sectors", createCompanySelectOption);
 
 showSelect();
 

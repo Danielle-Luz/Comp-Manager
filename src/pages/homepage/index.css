@@ -33,6 +33,11 @@ main.container {
   top: 8px;
 }
 
+.select-sectors,
+.sectors span {
+  cursor: pointer;
+}
+
 .available-sectors {
   border-right: 1px solid var(--color-opacity-2);
   border-left: 1px solid var(--color-opacity-2);
