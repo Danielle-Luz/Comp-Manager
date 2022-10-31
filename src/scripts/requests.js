@@ -2,9 +2,13 @@ import { createToast } from "./popups.js";
 
 const baseUrl = "http://localhost:6278";
 
-export function clearToken () {
+export function clearStoredData () {
   if (localStorage.getItem("token")) {
     localStorage.removeItem("token");
+  }
+
+  if (localStorage.getItem("is_admin")) {
+    localStorage.removeItem("is_admin");
   }
 }
 
