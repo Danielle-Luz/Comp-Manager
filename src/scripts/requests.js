@@ -25,21 +25,22 @@ export async function createUser (data) {
   let toast;
 
   if (response.ok) {
-    toast = createToast("Criação de usuário<br>bem-sucedida");
+    toast = createToast("Criação de usuário<br>bem-sucedida", "sucess");
 
   } else {
-    toast = createToast("E-mail já cadastrados");
+    toast = createToast("E-mail já cadastrado", "alert");
   }
 
   document.body.appendChild(toast);
   
   setTimeout(() => {
     toast.style.animationName = "hide";
-  }, 2000);
 
-  setTimeout(() => {
-    document.body.removeChild(document.querySelector("toast"));
-  }, 500);
+    setTimeout(() => {
+      document.body.removeChild(toast);
+    }, 500);
+  }, 5000);
+
 }
 
 async function login (data) {
