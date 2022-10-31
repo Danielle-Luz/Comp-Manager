@@ -14,7 +14,7 @@ export function renderAllCards (list, containerId, createCardFunction) {
   });
 }
 
-export function createCompanyCard ({name, opening_hours, description}) {
+export function createCompanyCard ({name, opening_hours, sectors:{description}}) {
   const card = `
   <li class="d-flex flex-column full-width justify-between organization-card">
     <h3 class="title-4">${name}</h3>
