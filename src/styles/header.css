@@ -51,7 +51,7 @@
   position: absolute;
 }
 
-@media (min-width: 580px) {
+@media (min-width: 600px) {
   .logo {
     width: 203px;
   }
