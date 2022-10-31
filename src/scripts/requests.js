@@ -20,6 +20,9 @@ async function sendData (data) {
 
 export async function createUser (data) {
   const response = await sendData(data);
+
+  if (response.ok) {
+  }
 }
 
 async function login (data) {
