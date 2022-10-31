@@ -79,7 +79,8 @@ export async function setCoworkers () {
     companyInfoContainer.innerHTML = noJobMessage;
   } else {
     const departmentInfo = await getCoworkers();
-    const {name, users} = departmentInfo[0];
+    const {name, users, company_uuid} = departmentInfo[0];
+    const companyName = await getCompanyNameById(company_uuid);
 
     const wrapperDiv = document.createElement("div");
     const title = document.createElement("h1");
@@ -88,7 +89,7 @@ export async function setCoworkers () {
     title.classList = "cards-title title-3";
     employeesList.classList = "align-center cards-container d-flex flex-column fit-height";
 
-    title.innerText = name;
+    title.innerText = `${companyName} - ${name}`;
 
     employeesList.id = "employees-list";
 
@@ -100,4 +101,12 @@ export async function setCoworkers () {
 
     renderAllCards(users, "#employees-list", createCoworkCard);
   }
+}
+
+async function getCompanyNameById (searchedId) {
+  const companies = await getAllCompanies();
+
+  const {name} = companies.find( ({uuid}) => uuid == searchedId);
+
+  return name;
 }
