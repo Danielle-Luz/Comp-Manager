@@ -29,5 +29,4 @@ function showSelect () {
       sectorsList.classList.add("d-none");
     });
   });
-
 }

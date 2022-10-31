@@ -13,7 +13,7 @@ export function clearStoredData () {
 }
 
 export function redirectUser () {
-  if (!localStorage.getItem("token") || !localStorage.getItem("is_admin")) {
+  if (!localStorage.getItem("token")) {
     window.location.replace("../login/index.html");
   }
 }
