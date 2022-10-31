@@ -33,6 +33,9 @@ export async function createUser (data) {
   if (response.ok) {
     toast = createToast("Criação de usuário<br>bem-sucedida", "sucess");
 
+    setTimeout(() => {
+      window.location.assign("../login/index.html");
+    }, 5500);
   } else {
     toast = createToast("E-mail já cadastrado", "alert");
   }
@@ -44,9 +47,8 @@ export async function createUser (data) {
 
     setTimeout(() => {
       document.body.removeChild(toast);
-    }, 500);
+    }, 480);
   }, 5000);
-
 }
 
 export async function login (data) {
