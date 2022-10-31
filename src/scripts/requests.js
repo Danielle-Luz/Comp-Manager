@@ -14,8 +14,8 @@ export function redirectUser () {
   }
 }
 
-async function sendData (data) {
-  const request = await fetch(`${baseUrl}/auth/register`, {
+async function sendData (endpoint, data) {
+  const request = await fetch(`${baseUrl}/auth/${endpoint}`, {
     method: "POST",
     headers: {
       "Content-type": "application/json"
@@ -27,8 +27,8 @@ async function sendData (data) {
 }
 
 export async function createUser (data) {
-  const response = await sendData(data);
   let toast;
+  const response = await sendData("register", data);
 
   if (response.ok) {
     toast = createToast("Criação de usuário<br>bem-sucedida", "sucess");
@@ -49,8 +49,29 @@ export async function createUser (data) {
 
 }
 
-async function login (data) {
-  const response = await sendData(data);
+export async function login (data) {
+  let toast;
+  const response = await sendData("login", data);
+  const token = response.json();
+
+  if (response.ok) {
+    localStorage.setItem("token", token);
+
+    console.log("foi");
+  } else {
+    toast = createToast("E-mail ou senha inválidos", "alert");
+    
+    console.log(toast);
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.style.animationName = "hide";
+  
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 500);
+    }, 5000);
+  }
 }
 
 async function getAllCompanies () {
