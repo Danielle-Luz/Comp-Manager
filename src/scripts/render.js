@@ -1,4 +1,4 @@
-import { getAllCompanies, getAllCompaniesBySector, getUserInfo } from "./requests.js";
+import { getAllCompanies, getAllCompaniesBySector, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
@@ -52,19 +52,24 @@ export function createCompanySelectOption ({description}) {
   return spanOption;
 }
 
-export function createCoworkCard({}) {
+export function createCoworkCard({username, professional_level}) {
+  const coworkerCard = `
+  <li class="card-employee d-flex flex-column">
+    <h3 class="title-5">${username}</h3>
+    <span class="text-4">${professional_level}</span>
+  </li>
+  `;
 
+  return coworkerCard;
 }
 
 export async function setCoworkers () {
   const userInfo = await getUserInfo();
   const {department_uuid} = userInfo;
-
-  console.log(department_uuid);
+  
+  const companyInfoContainer = document.querySelector(".company-info");
 
   if (!department_uuid) {
-    const companyInfoContainer = document.querySelector(".company-info");
-
     const noJobMessage = `
     <div class="align-center cards-container d-flex justify-center message-wrapper">
       <h2 class="title-1">Você ainda não foi contratado</h2>
@@ -73,7 +78,26 @@ export async function setCoworkers () {
 
     companyInfoContainer.innerHTML = noJobMessage;
   } else {
-    const coworkers = [];
-    renderAllCards(coworkers, ".company-info", createCoworkCard);
+    const departmentInfo = await getCoworkers();
+    const {name, users} = departmentInfo[0];
+
+    const wrapperDiv = document.createElement("div");
+    const title = document.createElement("h1");
+    const employeesList = document.createElement("ul");
+
+    title.classList = "cards-title title-3";
+    employeesList.classList = "align-center cards-container d-flex flex-column fit-height";
+
+    title.innerText = name;
+
+    employeesList.id = "employees-list";
+
+    wrapperDiv.append(title, employeesList);
+
+    companyInfoContainer.innerHTML = "";
+
+    companyInfoContainer.appendChild(wrapperDiv);
+
+    renderAllCards(users, "#employees-list", createCoworkCard);
   }
 }
