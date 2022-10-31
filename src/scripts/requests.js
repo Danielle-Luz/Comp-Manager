@@ -15,9 +15,7 @@ async function sendData (data) {
     body: JSON.stringify(data)
   });
 
-  const response = await request.json();
-
-  return response;
+  return request;
 }
 
 export async function createUser (data) {
