@@ -6,16 +6,20 @@ export function clearStoredData () {
   if (localStorage.getItem("token")) {
     localStorage.removeItem("token");
   }
-
-  if (localStorage.getItem("is_admin")) {
-    localStorage.removeItem("is_admin");
-  }
 }
 
 export function redirectUser () {
   if (!localStorage.getItem("token")) {
-    window.location.replace("../login/index.html");
+    window.location.replace("../homepage/index.html");
   }
+}
+
+export function verifyUserLevel (level) {
+ const isAdmin = getPermissionByToken(localStorage.getItem("token"));
+
+ if (isAdmin != level) {
+  window.location.replace("../homepage/index.html");
+ }
 }
 
 async function sendData (endpoint, data) {
