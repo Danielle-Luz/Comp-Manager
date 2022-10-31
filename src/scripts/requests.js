@@ -56,10 +56,14 @@ export async function login (data) {
 
   if (response.ok) {
     localStorage.setItem("token", token);
+
+    const permission = await getPermissionByToken();
+
+    localStorage.setItem("is_admin", permission.is_admin);
+
   } else {
     toast = createToast("E-mail ou senha inválidos", "alert");
     
-    console.log(toast);
     document.body.appendChild(toast);
     
     setTimeout(() => {
@@ -130,7 +134,7 @@ async function getUserInfo () {
   return userData;
 }
 
-async function getPermissionByToken (token) {
+async function getPermissionByToken () {
   const token = localStorage.getItem("token");
 
   const request = await fetch(`${baseUrl}/auth/validate_user`, {
