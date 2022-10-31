@@ -12,9 +12,9 @@ renderAllCards(sectors, "#sectors", createCompanySelectOption);
 showSelect();
 
 function showSelect () {
-  const select = document.getElementById("select-sectors");
+  const select = document.querySelector(".select-sectors");
 
-  const sectorsList = document.getElementById("sectors");
+  const sectorsList = document.querySelector(".sectors");
 
   select.addEventListener("click", () => {
     if (sectorsList.classList.contains("d-none")) {
