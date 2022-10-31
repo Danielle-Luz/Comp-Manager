@@ -22,10 +22,24 @@ async function sendData (data) {
 
 export async function createUser (data) {
   const response = await sendData(data);
+  let toast;
 
   if (response.ok) {
-    const toast = createToast("Criação de usuário<br>bem-sucedida");
+    toast = createToast("Criação de usuário<br>bem-sucedida");
+
+  } else {
+    toast = createToast("E-mail já cadastrados");
   }
+
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animationName = "hide";
+  }, 2000);
+
+  setTimeout(() => {
+    document.body.removeChild(document.querySelector("toast"));
+  }, 500);
 }
 
 async function login (data) {
