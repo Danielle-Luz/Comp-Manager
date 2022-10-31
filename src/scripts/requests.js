@@ -12,7 +12,7 @@ async function sendData (data) {
     headers: {
       "Content-type": "application/json"
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(data)
   });
 
   const response = await request.json();
