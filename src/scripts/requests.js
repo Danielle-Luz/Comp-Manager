@@ -133,7 +133,7 @@ export async function getAllSectors () {
   return sectors;
 }
 
-async function getUserInfo () {
+export async function getUserInfo () {
   const token = localStorage.getItem("token");
 
   const request = await fetch(`${baseUrl}/users/profile`, {
