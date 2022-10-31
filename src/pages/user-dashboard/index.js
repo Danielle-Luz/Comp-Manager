@@ -1,10 +1,5 @@
-import { getUserInfo, redirectUser, verifyUserLevel } from "../../scripts/requests";
+import { getUserInfo, redirectUser, verifyUserLevel } from "../../scripts/requests.js";
 
 redirectUser();
 
-verifyUserLevel(false);
-
-async function setUserInfo () {
-  const userInfo = await getUserInfo();
-}
-
+await verifyUserLevel(false);

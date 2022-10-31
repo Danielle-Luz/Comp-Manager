@@ -14,8 +14,8 @@ export function redirectUser () {
   }
 }
 
-export function verifyUserLevel (level) {
- const isAdmin = getPermissionByToken(localStorage.getItem("token"));
+export async function verifyUserLevel (level) {
+ const isAdmin = (await getPermissionByToken(localStorage.getItem("token"))).is_admin;
 
  if (isAdmin != level) {
   window.location.replace("../homepage/index.html");
