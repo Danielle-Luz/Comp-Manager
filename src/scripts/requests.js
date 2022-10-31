@@ -8,6 +8,12 @@ export function clearToken () {
   }
 }
 
+export function redirectUser () {
+  if (!localStorage.getItem("token")) {
+    window.location.replace("../login/index.html");
+  }
+}
+
 async function sendData (data) {
   const request = await fetch(`${baseUrl}/auth/register`, {
     method: "POST",
