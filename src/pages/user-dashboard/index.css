@@ -24,6 +24,12 @@ ul.cards-container {
 
 .message-wrapper {
   border: 1px solid var(--color-grey-2);
+  padding: 10px;
+  text-align: center;
+}
+
+.message-wrapper .title-1 {
+  line-height: 150%;
 }
 
 .email-info {
