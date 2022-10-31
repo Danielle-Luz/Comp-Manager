@@ -1,3 +1,4 @@
+import { setCoworkers } from "../../scripts/render.js";
 import { getUserInfo, redirectUser, verifyUserLevel } from "../../scripts/requests.js";
 
 redirectUser();
@@ -5,6 +6,8 @@ redirectUser();
 await verifyUserLevel(false);
 
 await setUserInfo();
+
+await setCoworkers();
 
 async function setUserInfo () {
   const userInfo = await getUserInfo();

@@ -1,4 +1,4 @@
-import { getAllCompanies, getAllCompaniesBySector } from "./requests.js";
+import { getAllCompanies, getAllCompaniesBySector, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
@@ -39,7 +39,7 @@ export function createCompanySelectOption ({description}) {
 
   spanOption.addEventListener("click", async () => {
     let companies = [];
-    
+
     if (description != "Todos") {
       companies = await getAllCompaniesBySector(spanOption.innerText);
     } else {
@@ -52,3 +52,28 @@ export function createCompanySelectOption ({description}) {
   return spanOption;
 }
 
+export function createCoworkCard({}) {
+
+}
+
+export async function setCoworkers () {
+  const userInfo = await getUserInfo();
+  const {department_uuid} = userInfo;
+
+  console.log(department_uuid);
+
+  if (!department_uuid) {
+    const companyInfoContainer = document.querySelector(".company-info");
+
+    const noJobMessage = `
+    <div class="align-center cards-container d-flex justify-center message-wrapper">
+      <h2 class="title-1">Você ainda não foi contratado</h2>
+    </div>
+    `;
+
+    companyInfoContainer.innerHTML = noJobMessage;
+  } else {
+    const coworkers = [];
+    renderAllCards(coworkers, ".company-info", createCoworkCard);
+  }
+}
