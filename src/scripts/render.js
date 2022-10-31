@@ -1,3 +1,5 @@
+import { getAllCompanies, getAllCompaniesBySector } from "./requests.js";
+
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
 
@@ -29,8 +31,24 @@ export function createCompanyCard ({name, opening_hours, sectors:{description}})
 }
 
 export function createCompanySelectOption ({description}) {
-  const option = `<span class="text-4">${description}</span>`;
+  const spanOption = document.createElement("span");
 
-  return option;
+  spanOption.classList = "text-4";
+
+  spanOption.innerText = description;
+
+  spanOption.addEventListener("click", async () => {
+    let companies = [];
+    
+    if (description != "Todos") {
+      companies = await getAllCompaniesBySector(spanOption.innerText);
+    } else {
+      companies = await getAllCompanies();
+    }
+
+    renderAllCards(companies, ".organizations-list", createCompanyCard);
+  });
+
+  return spanOption;
 }
 

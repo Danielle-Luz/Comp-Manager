@@ -100,9 +100,9 @@ export async function getAllCompanies () {
   return companies;
 }
 
-async function getAllCompaniesBySector (sector) {
+export async function getAllCompaniesBySector (sector) {
   const request = await fetch(`${baseUrl}/companies/${sector}`, {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-type": "application/json"
     }

@@ -5,6 +5,8 @@ const companies = await getAllCompanies();
 
 const sectors = await getAllSectors();
 
+sectors.unshift({description: "Todos"}); 
+
 renderAllCards(companies, ".organizations-list", createCompanyCard);
 
 renderAllCards(sectors, ".sectors", createCompanySelectOption);
@@ -27,4 +29,5 @@ function showSelect () {
       sectorsList.classList.add("d-none");
     });
   });
+
 }
