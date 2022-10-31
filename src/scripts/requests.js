@@ -41,7 +41,7 @@ export async function createUser (data) {
 
     setTimeout(() => {
       document.body.removeChild(toast);
-    }, 495);
+    }, 480);
   }, 5000);
 }
 
