@@ -113,7 +113,7 @@ async function getAllCompaniesBySector (sector) {
   return companies;
 }
 
-async function getAllSectors () {
+export async function getAllSectors () {
   const token = localStorage.getItem("token");
 
   const request = await fetch(`${baseUrl}/sectors`, {
