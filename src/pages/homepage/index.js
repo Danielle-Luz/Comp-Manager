@@ -8,3 +8,23 @@ const sectors = await getAllSectors();
 renderAllCards(companies, ".organizations-list", createCompanyCard);
 
 renderAllCards(sectors, "#sectors", createCompanySelectOption);
+
+showSelect();
+
+function showSelect () {
+  const select = document.getElementById("select-sectors");
+
+  const sectorsList = document.getElementById("sectors");
+
+  select.addEventListener("click", () => {
+    if (sectorsList.classList.contains("d-none")) {
+      sectorsList.classList.remove("d-none");
+    }
+  });
+
+  select.addEventListener("mouseleave", () => {
+    sectorsList.addEventListener("mouseleave", () => {
+      sectorsList.classList.add("d-none");
+    });
+  });
+}
