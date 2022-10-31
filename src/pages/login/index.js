@@ -1,6 +1,6 @@
 import { getFormData } from "../../scripts/forms.js";
-import { clearToken, login } from "../../scripts/requests.js";
+import { clearStoredData, login } from "../../scripts/requests.js";
 
-clearToken();
+clearStoredData();
 
 getFormData("login", login);
