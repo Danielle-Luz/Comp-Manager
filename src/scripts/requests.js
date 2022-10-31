@@ -22,6 +22,20 @@ export async function verifyUserLevel (level) {
  }
 }
 
+async function getPermissionByToken (token) {
+  const request = await fetch(`${baseUrl}/auth/validate_user`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  const permission = await request.json();
+
+  return permission;
+}
+
 async function sendData (endpoint, data) {
   const request = await fetch(`${baseUrl}/auth/${endpoint}`, {
     method: "POST",
@@ -149,8 +163,10 @@ export async function getUserInfo () {
   return userData;
 }
 
-async function getPermissionByToken (token) {
-  const request = await fetch(`${baseUrl}/auth/validate_user`, {
+export async function getCoworkers () {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/users/departments/coworkers`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -158,7 +174,7 @@ async function getPermissionByToken (token) {
     }
   });
 
-  const permission = await request.json();
+  const coworkers = await response.json();
 
-  return permission;
+  return coworkers;
 }
