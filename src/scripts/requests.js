@@ -129,3 +129,19 @@ async function getUserInfo () {
 
   return userData;
 }
+
+async function getPermissionByToken (token) {
+  const token = localStorage.getItem("token");
+
+  const request = await fetch(`${baseUrl}/auth/validate_user`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  const permission = await request.json();
+
+  return permission;
+}
