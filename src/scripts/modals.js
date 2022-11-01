@@ -59,12 +59,17 @@ export async function editLoggetUserModal ({username, email}) {
   inputEmail.name = "email";
   inputPassword.name = "password";
 
-  modalContentContainer.addEventListener("submit", () => {
+  inputUsername.value = username;
+  inputEmail.value = email;
+
+  modalContentContainer.addEventListener("submit", event => {
+    event.preventDefault();
+
     const toast = createToast("Usuário editado com sucesso", "sucess");
 
     const fields = document.querySelectorAll("input");
 
-    const data = {};
+    let data = {};
 
     fields.forEach(({name, value}) => {
       if (value) {
