@@ -243,3 +243,14 @@ export async function editDepartment (data, id) {
 
   return response;
 }
+
+export async function deleteDepartment (id) {
+  const response = await fetch(`${baseUrl}/departments/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  return response;
+}
