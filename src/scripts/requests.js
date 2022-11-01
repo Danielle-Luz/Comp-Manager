@@ -228,3 +228,9 @@ export async function createDepartment (data) {
 
   return response;
 }
+
+export async function editDepartment (data, id) {
+  const response = await sendDataWithToken(`/departments/${id}`, data);
+
+  return response;
+}
