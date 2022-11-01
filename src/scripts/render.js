@@ -182,7 +182,7 @@ function createSectorCard ({uuid, name, description, companies:{name:companyName
   return card;
 }
 
-async function renderByOption () {
+export async function renderByOption () {
   const select = document.getElementById("company-names");
 
   const options = [...select.querySelectorAll("option")];
@@ -196,8 +196,6 @@ async function renderByOption () {
   let sectors;
   if (company == "Selecionar empresa") {
     sectors = await getAllDepartments();
-
-    console.log(sectors)
   } else {
     sectors = await getCompanySectors(id);
   }

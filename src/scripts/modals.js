@@ -1,6 +1,7 @@
 import { setUserInfo } from "../pages/user-dashboard/index.js";
-import { editLoggedUser } from "./requests.js";
+import { editLoggedUser, getAllCompanies } from "./requests.js";
 import { createToast } from "./popups.js";
+import { renderByOption } from "./render.js";
 
 export async function createModal (modalContent) {
   const modalWrapper = document.createElement("div");
@@ -102,3 +103,95 @@ export async function editLoggetUserModal ({username, email}) {
 
   createModal(modalContentContainer);
 }
+
+export async function editLoggetUserModal () {
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const inputName = document.createElement("input");
+  const inputDescription = document.createElement("input");
+  const selectCompany = document.createElement("select");
+  const editButton = document.createElement("button");
+
+  modalContentContainer.classList = "d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-1";
+  inputDescription.classList = "full-width input-1";
+  inputName.classList = "full-width input-1";
+  selectCompany.classList = "full-width input-1";
+  editButton.classList = "button button-brand";
+
+  modalTitle.innerText = "Criar departamento";
+  editButton.innerText = "Editar";
+
+  inputName.placeholder = "Nome do departamento";
+  inputDescription.placeholder = "Descrição";
+  selectCompany.insertAdjacentHTML("afterbegin", "<option disabled selected>Selecionar empresa</option>");
+
+  inputName.name = "name";
+  inputDescription.name = "description";
+  selectCompany.name = "company_uuid";
+
+  inputName.setAttribute("required", "true");
+  inputDescription.setAttribute("required", "true");
+  selectCompany.setAttribute("required", "true");
+
+  const companies = await getAllCompanies();
+
+  companies.forEach(({name, uuid}) => {
+    selectCompany.insertAdjacentHTML("beforeend", `<option value="${name}" data-id="${uuid}">${name}</option>`);
+  });
+
+  modalContentContainer.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const fields = document.querySelectorAll("input, select");
+
+    let data = {};
+
+    fields.forEach((field) => {
+      const {name, value} = field;
+
+      if (name != "company_uuid") {
+        data = {
+          ...data,
+          [name]: value
+        }
+      } else {
+        const selectedOption = field.options[field.selectedIndex];
+
+        const companyId = selectedOption.getAttribute("data-id");
+
+        data = {
+          ...data,
+          [name]: companyId
+        }
+      }
+    })
+
+    const response = await createDepartment(data);
+    let toast;
+
+    if (response.ok) {
+      toast = createToast("Departamento criado com sucesso", "sucess");
+
+      await renderByOption();
+    } else {
+      toast = createToast("O departamento já pertence a essa empresa", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        document.body.removeChild(document.querySelector(".modal-wrapper"));
+      }, 500);
+    }, 5000);
+  });
+
+  modalContentContainer.append(modalTitle, inputName, inputDescription, selectCompany, editButton);
+
+  createModal(modalContentContainer);
+}
+
+
