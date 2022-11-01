@@ -110,3 +110,21 @@ async function getCompanyNameById (searchedId) {
 
   return name;
 }
+
+export function createDefaultSelectOption ({name, uuid}) {
+  const option = document.createElement("option");
+
+  option.innerText = name;
+
+  
+  option.addEventListener("click", async () => {
+    let sectors;
+    if (name == "Selecionar empresa") {
+      sectors = await getAllCompanies();
+    } else {
+      sectors = await getCompanySectors(uuid);
+    }
+  });
+
+  return option;
+}
