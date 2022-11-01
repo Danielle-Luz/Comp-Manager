@@ -1,3 +1,4 @@
+import { editLoggetUserModal } from "../../scripts/modals.js";
 import { setCoworkers } from "../../scripts/render.js";
 import { getUserInfo, redirectUser, verifyUserLevel } from "../../scripts/requests.js";
 
@@ -9,7 +10,7 @@ await setUserInfo();
 
 await setCoworkers();
 
-async function setUserInfo () {
+export async function setUserInfo () {
   const userInfo = await getUserInfo();
 
   const username = document.getElementById("username");
@@ -23,3 +24,14 @@ async function setUserInfo () {
   typeOfWork.innerText = userInfo.kind_of_work || "";
 }
 
+async function addEditUserEvent () {
+  const userInfo = await getUserInfo();
+
+  const editButton = document.getElementById("edit-user");
+
+  editButton.addEventListener("click", async () => {
+    await editLoggetUserModal(userInfo);
+  })
+}
+
+addEditUserEvent();

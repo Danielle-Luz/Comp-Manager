@@ -178,3 +178,16 @@ export async function getCoworkers () {
 
   return coworkers;
 }
+
+export async function editLoggedUser (data) {
+  const token = localStorage.getItem("token");
+
+  const response =  await fetch(`${baseUrl}/users`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+}

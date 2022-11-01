@@ -1,3 +1,7 @@
+import { setUserInfo } from "../pages/user-dashboard/index.js";
+import { editLoggedUser } from "./requests.js";
+import { createToast } from "./popups.js";
+
 export async function createModal (modalContent) {
   const modalWrapper = document.createElement("div");
   const modal = document.createElement("article");
@@ -6,10 +10,10 @@ export async function createModal (modalContent) {
 
   modalWrapper.classList = "align-center d-flex full-width full-height justify-center modal-wrapper";
   modal.classList = "align-center d-flex flex-column justify-center modal";
-  button.classList = "close-modal self-end";
+  closeButton.classList = "close-modal self-end";
   buttonIcon.classList = "button-icon";
 
-  button.setAttribute("aria-label", "fechar modal");
+  closeButton.setAttribute("aria-label", "fechar modal");
 
   buttonIcon.src = "../../assets/imgs/close.svg";
   buttonIcon.alt = "desenho de 'x'";
@@ -24,7 +28,9 @@ export async function createModal (modalContent) {
 
   modalWrapper.appendChild(modal);
 
-  document.body.appendChild(modalWrapper);
+  console.log(modalContent);
+
+  document.body.insertAdjacentElement("afterbegin", modalWrapper);
 }
 
 export async function editLoggetUserModal ({username, email}) {
@@ -54,6 +60,8 @@ export async function editLoggetUserModal ({username, email}) {
   inputPassword.name = "password";
 
   modalContentContainer.addEventListener("submit", () => {
+    const toast = createToast("Usuário editado com sucesso", "sucess");
+
     const fields = document.querySelectorAll("input");
 
     const data = {};
@@ -67,7 +75,21 @@ export async function editLoggetUserModal ({username, email}) {
       } 
     })
 
+    editLoggedUser(data);
 
+    setUserInfo();
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.animationName = "hide";
+
+      setTimeout(() => {
+        document.body.removeChild(document.querySelector(".toast"));
+  
+        document.body.removeChild(document.querySelector(".modal-wrapper"));
+      }, 500);
+    }, 5000);
   });
 
   modalContentContainer.append(modalTitle, inputUsername, inputEmail, inputPassword, editButton);
