@@ -245,6 +245,8 @@ export async function editDepartment (data, id) {
 }
 
 export async function deleteDepartment (id) {
+  const token = localStorage.getItem("token");
+  
   const response = await fetch(`${baseUrl}/departments/${id}`, {
     method: "DELETE",
     headers: {

@@ -21,3 +21,9 @@
 .modal-content .title-2 {
   margin-bottom: 1.25rem;
 }
+
+.modal-content .title-3 {
+  line-height: 150%;
+  margin-block: 1.5rem 2.375rem;
+  text-align: center;
+}

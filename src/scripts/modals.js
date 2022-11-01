@@ -1,4 +1,4 @@
-import { createDepartment, editDepartment, editLoggedUser, getAllCompanies } from "./requests.js";
+import { createDepartment, deleteDepartment, editDepartment, editLoggedUser, getAllCompanies } from "./requests.js";
 import { createToast } from "./popups.js";
 import { renderByOption, setUserInfo } from "./render.js";
 
@@ -193,7 +193,7 @@ export async function createCompanyModal () {
   createModal(modalContentContainer);
 }
 
-export async function editCompanyModal (description, id) {
+export async function editDepartmentModal (description, id) {
   const modalContentContainer = document.createElement("form");
   const modalTitle = document.createElement("h2");
   const textareaDescription = document.createElement("textarea");
@@ -243,6 +243,49 @@ export async function editCompanyModal (description, id) {
   });
 
   modalContentContainer.append(modalTitle, textareaDescription, editButton);
+
+  createModal(modalContentContainer);
+}
+
+export async function deleteDepartmentModal (id, name) {
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const deleteButton = document.createElement("button");
+
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-3";
+  deleteButton.classList = "button button-brand full-width toast-sucess";
+
+  modalTitle.innerText = `Realmente deseja deletar o departamento ${name} e demitir seus funcionários?`;
+  deleteButton.innerText = "Confirmar";
+
+  modalContentContainer.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const response = await deleteDepartment(id);
+
+    let toast;
+
+    if (response.ok) {
+      toast = createToast("Departamento excluído com sucesso", "sucess");
+
+      await renderByOption();
+    } else {
+      toast = createToast("Não foi possível excluir o departamento", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        document.body.removeChild(document.querySelector(".modal-wrapper"));
+      }, 500);
+    }, 5000);
+  });
+
+  modalContentContainer.append(modalTitle, deleteButton);
 
   createModal(modalContentContainer);
 }

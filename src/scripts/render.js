@@ -1,4 +1,4 @@
-import { editCompanyModal } from "./modals.js";
+import { deleteDepartmentModal, editDepartmentModal } from "./modals.js";
 import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
@@ -177,7 +177,11 @@ function createSectorCard ({uuid, name, description, companies:{name:companyName
   buttonDelete.appendChild(buttonDeleteIcon);
 
   buttonEdit.addEventListener("click", () => {
-    editCompanyModal(description, uuid);
+    editDepartmentModal(description, uuid);
+  });
+
+  buttonDelete.addEventListener("click", () => {
+    deleteDepartmentModal(uuid, name);
   });
 
   buttonGroup.append(buttonEye, buttonEdit, buttonDelete);
