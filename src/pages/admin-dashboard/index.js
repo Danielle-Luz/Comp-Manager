@@ -8,3 +8,13 @@ companies.unshift({name:"Selecionar empresa"});
 renderAllCards(companies, "#company-names", createDefaultSelectOption);
 
 await renderSectorsBySelectedCompany();
+
+addCreateDepartmentEvent();
+
+function addCreateDepartmentEvent() {
+  const createButton = document.getElementById("create-company");
+
+  createButton.addEventListener("click", () => {
+
+  });
+}
