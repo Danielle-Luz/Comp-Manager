@@ -202,6 +202,7 @@ async function renderByOption () {
     sectors = await getCompanySectors(id);
   }
 
+  document.getElementById("company-list").classList.remove("justify-center");
 
   renderAllCards(sectors, "#company-list", createSectorCard);
 }
