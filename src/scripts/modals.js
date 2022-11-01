@@ -62,10 +62,8 @@ export async function editLoggetUserModal ({username, email}) {
   inputUsername.value = username;
   inputEmail.value = email;
 
-  modalContentContainer.addEventListener("submit", event => {
+  modalContentContainer.addEventListener("submit", async event => {
     event.preventDefault();
-
-    const toast = createToast("Usuário editado com sucesso", "sucess");
 
     const fields = document.querySelectorAll("input");
 
@@ -80,12 +78,19 @@ export async function editLoggetUserModal ({username, email}) {
       } 
     })
 
-    editLoggedUser(data);
+    const response = await editLoggedUser(data);
+    let toast;
 
-    setUserInfo();
+    if (response.ok) {
+      toast = createToast("Usuário editado com sucesso", "sucess");
 
-    document.body.appendChild(toast);
+      await setUserInfo();
+    } else {
+      toast = createToast("Dados já pertencentes a outro usuário", "alert");
+    }
 
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
     setTimeout(() => {
       toast.style.animationName = "hide";
 

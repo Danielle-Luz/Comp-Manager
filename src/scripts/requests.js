@@ -190,4 +190,6 @@ export async function editLoggedUser (data) {
     },
     body: JSON.stringify(data)
   });
+
+  return response;
 }

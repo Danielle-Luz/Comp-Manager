@@ -9,7 +9,7 @@
   text-align: center;
   padding: 1.25rem;
   position: fixed;
-  z-index: 20;
+  z-index: 1000;
 }
 
 .toast-sucess {
