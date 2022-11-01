@@ -1,4 +1,4 @@
-import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCoworkers, getUserInfo } from "./requests.js";
+import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
@@ -185,11 +185,9 @@ function createSectorCard ({uuid, name, description, companies:{name:companyName
 async function renderByOption () {
   const select = document.getElementById("company-names");
 
-  const options = [...select.querySelectorAll("option")];
-
   const company = select.value;
   
-  const selectedOption = options.find( option => option.innerText == company);
+  const selectedOption = select.options[select.selectedIndex];
 
   const id = selectedOption.getAttribute("data-id");
 

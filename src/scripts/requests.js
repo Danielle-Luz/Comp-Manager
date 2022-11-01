@@ -207,3 +207,19 @@ export async function editLoggedUser (data) {
 
   return response;
 }
+
+export async function getCompanySectors (id) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/departments/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+
+  const sectors = await response.json();
+
+  return sectors;
+}
