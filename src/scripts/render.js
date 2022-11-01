@@ -116,17 +116,33 @@ export function createDefaultSelectOption ({name, uuid}) {
 
   option.innerText = name;
 
-  
-  option.addEventListener("click", async () => {
-    let sectors;
-    if (name == "Selecionar empresa") {
-      sectors = await getAllCompanies();
-    } else {
-      sectors = await getCompanySectors(uuid);
-    }
-  });
+  option.setAttribute("data-id", uuid);
 
   return option;
+}
+
+export function renderSectorsBySelectedCompany () {
+  const select = document.getElementById("company-names");
+  
+  select.addEventListener("input", async () => {
+    const options = [...select.querySelectorAll("option")];
+
+    const company = select.value;
+    
+    const selectedOption = options.find( option => option.innerText == company);
+
+    const id = selectedOption.getAttribute("data-id");
+
+    let sectors;
+    if (company == "Selecionar empresa") {
+      sectors = await getAllCompanies();
+
+    } else {
+      sectors = await getCompanySectors(id);
+    }
+
+    renderAllCards(sectors, "#company-list", createSectorCard);
+  });
 }
 
 function createSectorCard ({uuid, name, description}, companyName) {
