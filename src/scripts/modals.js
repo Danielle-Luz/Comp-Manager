@@ -1,4 +1,4 @@
-import { editLoggedUser, getAllCompanies } from "./requests.js";
+import { createDepartment, editLoggedUser, getAllCompanies } from "./requests.js";
 import { createToast } from "./popups.js";
 import { renderByOption, setUserInfo } from "./render.js";
 
@@ -142,7 +142,7 @@ export async function createCompanyModal () {
   modalContentContainer.addEventListener("submit", async event => {
     event.preventDefault();
 
-    const fields = document.querySelectorAll("input, select");
+    const fields = modalContentContainer.querySelectorAll("input, select");
 
     let data = {};
 
