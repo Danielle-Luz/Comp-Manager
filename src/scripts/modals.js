@@ -193,4 +193,58 @@ export async function createCompanyModal () {
   createModal(modalContentContainer);
 }
 
+export async function editCompanyModal () {
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const textareaDescription = document.createElement("textarea");
+  const editButton = document.createElement("button");
+
+  modalContentContainer.classList = "d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-1";
+  textareaDescription.classList = "full-width input-1";
+  editButton.classList = "button button-brand";
+
+  modalTitle.innerText = "Editar departamento";
+  editButton.innerText = "Editar";
+
+  textareaDescription.placeholder = "Valores anteriores da descrição";
+
+  textareaDescription.name = "description";
+
+  textareaDescription.setAttribute("required", "true");
+
+  modalContentContainer.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const { name, value } = modalContentContainer.querySelector("textarea");
+
+    let data = { [name]: value };
+
+    const response = await editDepartment(data);
+    let toast;
+
+    if (response.ok) {
+      toast = createToast("Departamento criado com sucesso", "sucess");
+
+      await renderByOption();
+    } else {
+      toast = createToast("Não foi possível editar o departamento", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        document.body.removeChild(document.querySelector(".modal-wrapper"));
+      }, 500);
+    }, 5000);
+  });
+
+  modalContentContainer.append(modalTitle, textareaDescription, editButton);
+
+  createModal(modalContentContainer);
+}
+
 
