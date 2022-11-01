@@ -128,3 +128,54 @@ export function createDefaultSelectOption ({name, uuid}) {
 
   return option;
 }
+
+function createSectorCard ({uuid, name, description}, companyName) {
+  const card = document.createElement("li");
+  const sectorNameTitle = document.createElement("h3");
+  const descriptionSpan = document.createElement("span");
+  const companyNameSpan = document.createElement("span");
+  const buttonGroup = document.createElement("div");
+  const buttonEye = document.createElement("button");
+  const buttonEyeIcon = document.createElement("img");
+  const buttonEdit = document.createElement("button");
+  const buttonEditIcon = document.createElement("img");
+  const buttonDelete = document.createElement("button");
+  const buttonDeleteIcon = document.createElement("img");
+
+  card.classList = "d-flex flex-column full-width organization-card";
+  sectorNameTitle.classList = "title-4";
+  descriptionSpan.classList = "text-4";
+  companyNameSpan.classList = "text-4";
+  buttonGroup.classList = "d-flex full-width justify-center button-group";
+  buttonEye.classList = "button-icon";
+  buttonEdit.classList = "button-icon";
+  buttonDelete.classList = "button-icon";
+
+  buttonEye.setAttribute("aria-label", "visualizar informações sobre o departamento")
+  buttonEdit.setAttribute("aria-label", "editar departamento")
+  buttonDelete.setAttribute("aria-label", "deletar departamento")
+  
+  sectorNameTitle.innerText = name;
+  descriptionSpan.innerText = description;
+  companyNameSpan.innerText = companyName;
+  
+  card.setAttribute("data-id", uuid);
+
+  buttonEyeIcon.src = "../../assets/imgs/eye.svg";
+  buttonEditIcon.src = "../../assets/imgs/black-pencil.svg";
+  buttonDeleteIcon.src = "../../assets/imgs/black-trash.svg";
+  
+  buttonEyeIcon.alt = "ícone de olho";
+  buttonEditIcon.alt = "ícone de lápis preto";
+  buttonDeleteIcon.alt = "ícone de lixeira preta";
+
+  buttonEye.appendChild(buttonEyeIcon);
+  buttonEdit.appendChild(buttonEditIcon);
+  buttonDelete.appendChild(buttonDeleteIcon);
+
+  buttonGroup.append(buttonEye, buttonEdit, buttonDelete);
+
+  card.append(sectorNameTitle, descriptionSpan, companyNameSpan, buttonGroup);
+
+  return card;
+}
