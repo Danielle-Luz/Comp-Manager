@@ -37,7 +37,7 @@ async function getPermissionByToken (token) {
 }
 
 async function sendData (endpoint, data) {
-  const request = await fetch(`${baseUrl}/auth/${endpoint}`, {
+  const request = await fetch(`${baseUrl}${endpoint}`, {
     method: "POST",
     headers: {
       "Content-type": "application/json"
@@ -48,9 +48,24 @@ async function sendData (endpoint, data) {
   return request;
 }
 
+async function sendDataWithToken (endpoint, data) {
+  const token = localStorage.getItem("token");
+
+  const request = await fetch(`${baseUrl}${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  return request;
+}
+
 export async function createUser (data) {
   let toast;
-  const response = await sendData("register", data);
+  const response = await sendData("/auth/register", data);
 
   if (response.ok) {
     toast = createToast("Criação de usuário<br>bem-sucedida", "sucess");
@@ -75,7 +90,7 @@ export async function createUser (data) {
 
 export async function login (data) {
   let toast;
-  const response = await sendData("login", data);
+  const response = await sendData("/auth/login", data);
   const token = (await response.json()).token;
 
   if (response.ok) {
@@ -209,7 +224,7 @@ export async function editLoggedUser (data) {
 }
 
 export async function createDepartment (data) {
-  const response = await sendData("departments", data);
+  const response = await sendDataWithToken("/departments", data);
 
   return response;
 }
