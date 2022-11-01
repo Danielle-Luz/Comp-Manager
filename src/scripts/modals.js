@@ -104,7 +104,7 @@ export async function editLoggetUserModal ({username, email}) {
   createModal(modalContentContainer);
 }
 
-export async function editLoggetUserModal () {
+export async function createCompanyModal () {
   const modalContentContainer = document.createElement("form");
   const modalTitle = document.createElement("h2");
   const inputName = document.createElement("input");

@@ -1,4 +1,4 @@
-import { editLoggetUserModal } from "../../scripts/modals.js";
+import { createCompanyModal } from "../../scripts/modals.js";
 import { createDefaultSelectOption, renderAllCards, renderSectorsBySelectedCompany } from "../../scripts/render.js";
 import { getAllCompanies } from "../../scripts/requests.js";
 
@@ -16,6 +16,6 @@ function addCreateDepartmentEvent() {
   const createButton = document.getElementById("create-company");
 
   createButton.addEventListener("click", () => {
-    editLoggetUserModal();
+    createCompanyModal();
   });
 }
