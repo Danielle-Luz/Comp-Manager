@@ -207,7 +207,7 @@ export async function editCompanyModal (description, id) {
   modalTitle.innerText = "Editar departamento";
   editButton.innerText = "Editar";
 
-  textareaDescription.placeholder = description;
+  textareaDescription.value = description;
 
   textareaDescription.name = "description";
 

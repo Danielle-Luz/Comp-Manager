@@ -230,7 +230,16 @@ export async function createDepartment (data) {
 }
 
 export async function editDepartment (data, id) {
-  const response = await sendDataWithToken(`/departments/${id}`, data);
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/departments/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
 
   return response;
 }
