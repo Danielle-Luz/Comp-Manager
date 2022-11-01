@@ -1,4 +1,4 @@
-import { createDepartment, editLoggedUser, getAllCompanies } from "./requests.js";
+import { createDepartment, deleteDepartment, editDepartment, editLoggedUser, getAllCompanies } from "./requests.js";
 import { createToast } from "./popups.js";
 import { renderByOption, setUserInfo } from "./render.js";
 
@@ -193,21 +193,21 @@ export async function createCompanyModal () {
   createModal(modalContentContainer);
 }
 
-export async function editCompanyModal () {
+export async function editDepartmentModal (description, id) {
   const modalContentContainer = document.createElement("form");
   const modalTitle = document.createElement("h2");
   const textareaDescription = document.createElement("textarea");
   const editButton = document.createElement("button");
 
-  modalContentContainer.classList = "d-flex flex-column modal-content full-width form-1";
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
   modalTitle.classList = "title-1";
-  textareaDescription.classList = "full-width input-1";
-  editButton.classList = "button button-brand";
+  textareaDescription.classList = "full-width input-1 text-4";
+  editButton.classList = "button button-brand full-width";
 
   modalTitle.innerText = "Editar departamento";
   editButton.innerText = "Editar";
 
-  textareaDescription.placeholder = "Valores anteriores da descrição";
+  textareaDescription.value = description;
 
   textareaDescription.name = "description";
 
@@ -220,11 +220,11 @@ export async function editCompanyModal () {
 
     let data = { [name]: value };
 
-    const response = await editDepartment(data);
+    const response = await editDepartment(data, id);
     let toast;
 
     if (response.ok) {
-      toast = createToast("Departamento criado com sucesso", "sucess");
+      toast = createToast("Departamento editado com sucesso", "sucess");
 
       await renderByOption();
     } else {
@@ -246,5 +246,49 @@ export async function editCompanyModal () {
 
   createModal(modalContentContainer);
 }
+
+export async function deleteDepartmentModal (id, name) {
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const deleteButton = document.createElement("button");
+
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-3";
+  deleteButton.classList = "button button-brand full-width toast-sucess";
+
+  modalTitle.innerText = `Realmente deseja deletar o departamento ${name} e demitir seus funcionários?`;
+  deleteButton.innerText = "Confirmar";
+
+  modalContentContainer.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const response = await deleteDepartment(id);
+
+    let toast;
+
+    if (response.ok) {
+      toast = createToast("Departamento excluído com sucesso", "sucess");
+
+      await renderByOption();
+    } else {
+      toast = createToast("Não foi possível excluir o departamento", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        document.body.removeChild(document.querySelector(".modal-wrapper"));
+      }, 500);
+    }, 5000);
+  });
+
+  modalContentContainer.append(modalTitle, deleteButton);
+
+  createModal(modalContentContainer);
+}
+
 
 

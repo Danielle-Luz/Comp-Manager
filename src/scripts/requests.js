@@ -228,3 +228,31 @@ export async function createDepartment (data) {
 
   return response;
 }
+
+export async function editDepartment (data, id) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/departments/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  return response;
+}
+
+export async function deleteDepartment (id) {
+  const token = localStorage.getItem("token");
+  
+  const response = await fetch(`${baseUrl}/departments/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  return response;
+}
