@@ -25,11 +25,11 @@ export async function setUserInfo () {
 }
 
 async function addEditUserEvent () {
-  const userInfo = await getUserInfo();
-
   const editButton = document.getElementById("edit-user");
-
+  
   editButton.addEventListener("click", async () => {
+    const userInfo = await getUserInfo();
+
     await editLoggetUserModal(userInfo);
   })
 }

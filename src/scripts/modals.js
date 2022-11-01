@@ -28,8 +28,6 @@ export async function createModal (modalContent) {
 
   modalWrapper.appendChild(modal);
 
-  console.log(modalContent);
-
   document.body.insertAdjacentElement("afterbegin", modalWrapper);
 }
 
@@ -92,10 +90,8 @@ export async function editLoggetUserModal ({username, email}) {
     document.body.insertAdjacentElement("afterbegin", toast);
     
     setTimeout(() => {
-      toast.style.animationName = "hide";
-
       setTimeout(() => {
-        document.body.removeChild(document.querySelector(".toast"));
+        toast.remove();
   
         document.body.removeChild(document.querySelector(".modal-wrapper"));
       }, 500);
