@@ -1,7 +1,6 @@
-import { setUserInfo } from "../pages/user-dashboard/index.js";
 import { editLoggedUser, getAllCompanies } from "./requests.js";
 import { createToast } from "./popups.js";
-import { renderByOption } from "./render.js";
+import { renderByOption, setUserInfo } from "./render.js";
 
 export async function createModal (modalContent) {
   const modalWrapper = document.createElement("div");

@@ -207,3 +207,9 @@ export async function editLoggedUser (data) {
 
   return response;
 }
+
+export async function createDepartment (data) {
+  const response = await sendData("/departments", data);
+
+  return response;
+}
