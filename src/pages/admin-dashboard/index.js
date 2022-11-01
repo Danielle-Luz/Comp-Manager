@@ -7,4 +7,4 @@ companies.unshift({name:"Selecionar empresa"});
 
 renderAllCards(companies, "#company-names", createDefaultSelectOption);
 
-renderSectorsBySelectedCompany();
+await renderSectorsBySelectedCompany();

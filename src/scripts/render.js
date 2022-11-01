@@ -1,4 +1,4 @@
-import { getAllCompanies, getAllCompaniesBySector, getCoworkers, getUserInfo } from "./requests.js";
+import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
@@ -121,31 +121,17 @@ export function createDefaultSelectOption ({name, uuid}) {
   return option;
 }
 
-export function renderSectorsBySelectedCompany () {
+export async function renderSectorsBySelectedCompany () {
   const select = document.getElementById("company-names");
   
-  select.addEventListener("input", async () => {
-    const options = [...select.querySelectorAll("option")];
+  select.addEventListener("input", async () => await renderByOption () );
 
-    const company = select.value;
-    
-    const selectedOption = options.find( option => option.innerText == company);
+  select.value = "Selecionar empresa";
 
-    const id = selectedOption.getAttribute("data-id");
-
-    let sectors;
-    if (company == "Selecionar empresa") {
-      sectors = await getAllCompanies();
-
-    } else {
-      sectors = await getCompanySectors(id);
-    }
-
-    renderAllCards(sectors, "#company-list", createSectorCard);
-  });
+  await renderByOption();
 }
 
-function createSectorCard ({uuid, name, description}, companyName) {
+function createSectorCard ({uuid, name, description, companies:{name:companyName}}) {
   const card = document.createElement("li");
   const sectorNameTitle = document.createElement("h3");
   const descriptionSpan = document.createElement("span");
@@ -194,4 +180,28 @@ function createSectorCard ({uuid, name, description}, companyName) {
   card.append(sectorNameTitle, descriptionSpan, companyNameSpan, buttonGroup);
 
   return card;
+}
+
+async function renderByOption () {
+  const select = document.getElementById("company-names");
+
+  const options = [...select.querySelectorAll("option")];
+
+  const company = select.value;
+  
+  const selectedOption = options.find( option => option.innerText == company);
+
+  const id = selectedOption.getAttribute("data-id");
+
+  let sectors;
+  if (company == "Selecionar empresa") {
+    sectors = await getAllDepartments();
+
+    console.log(sectors)
+  } else {
+    sectors = await getCompanySectors(id);
+  }
+
+
+  renderAllCards(sectors, "#company-list", createSectorCard);
 }

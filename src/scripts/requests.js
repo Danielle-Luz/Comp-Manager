@@ -145,6 +145,22 @@ export async function getAllSectors () {
   return sectors;
 }
 
+export async function getAllDepartments () {
+  const token = localStorage.getItem("token");
+
+  const request = await fetch(`${baseUrl}/departments`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  const departments = await request.json();
+
+  return departments;
+}
+
 export async function getUserInfo () {
   const token = localStorage.getItem("token");
 
