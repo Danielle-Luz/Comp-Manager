@@ -199,10 +199,10 @@ export async function editCompanyModal (description, id) {
   const textareaDescription = document.createElement("textarea");
   const editButton = document.createElement("button");
 
-  modalContentContainer.classList = "d-flex flex-column modal-content full-width form-1";
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
   modalTitle.classList = "title-1";
-  textareaDescription.classList = "full-width input-1";
-  editButton.classList = "button button-brand";
+  textareaDescription.classList = "full-width input-1 text-4";
+  editButton.classList = "button button-brand full-width";
 
   modalTitle.innerText = "Editar departamento";
   editButton.innerText = "Editar";

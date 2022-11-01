@@ -43,6 +43,15 @@ select {
   border-color: var(--color-brand-1);
 }
 
+textarea.input-1 {
+  height: 113px;
+  resize: none;
+}
+
+.form-1 textarea.text-4 {
+  margin-bottom: 0;
+}
+
 @media (min-width: 440px) {
   .form-1 {
     padding: 2.625rem

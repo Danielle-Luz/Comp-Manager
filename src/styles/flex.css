@@ -25,3 +25,7 @@
 .self-end {
   align-self: flex-end;
 }
+
+.align-start {
+  align-items: flex-start;
+}
