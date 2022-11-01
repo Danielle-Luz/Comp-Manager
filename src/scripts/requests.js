@@ -83,8 +83,6 @@ export async function login (data) {
     
     localStorage.setItem("token", token);
 
-    localStorage.setItem("is_admin", permission.is_admin);
-
     if (permission.is_admin) {
       window.location.assign("../admin-dashboard/index.html");
     } else {
