@@ -1,3 +1,4 @@
+import { editCompanyModal } from "./modals.js";
 import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
@@ -174,6 +175,10 @@ function createSectorCard ({uuid, name, description, companies:{name:companyName
   buttonEye.appendChild(buttonEyeIcon);
   buttonEdit.appendChild(buttonEditIcon);
   buttonDelete.appendChild(buttonDeleteIcon);
+
+  buttonEdit.addEventListener("click", () => {
+    editCompanyModal(description, uuid);
+  });
 
   buttonGroup.append(buttonEye, buttonEdit, buttonDelete);
 
