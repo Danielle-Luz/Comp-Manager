@@ -67,22 +67,10 @@ export async function editLoggetUserModal ({username, email}) {
       } 
     })
 
-    
+
   });
 
   modalContentContainer.append(modalTitle, inputUsername, inputEmail, inputPassword, editButton);
+
+  createModal(modalContentContainer);
 }
-<div class="align-center d-flex full-width full-height justify-center modal-wrapper">
-      <article class="align-center d-flex flex-column justify-center modal">
-        <button class="close-modal self-end" aria-label="fechar modal">
-          <img class="button-icon" src="../../assets/imgs/close.svg" alt="desenho de 'x'">
-        </button>
-        <article class="d-flex flex-column modal-content full-width form-1">
-          <h2 class="title-1">Editar Usuário</h2>
-          <input class="full-width input-1" placeholder="Username">
-          <input class="full-width input-1" placeholder="Email">
-          <input class="full-width input-1" placeholder="Senha">
-          <button class="button button-brand">Editar</button>
-        </article>
-      </article>
-    </div>
