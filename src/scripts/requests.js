@@ -305,5 +305,7 @@ export async function getAllUsers () {
     return newUser;
   });
 
+  users = users.filter( ({email}) => email != "admin@mail.com");
+
   return users;
 }
