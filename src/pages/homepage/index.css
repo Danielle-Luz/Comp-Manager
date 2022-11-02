@@ -47,6 +47,7 @@ main.container {
   left: 0;
   position: absolute;
   top: 0;
+  z-index: 1000;
 }
 
 .available-sectors span {

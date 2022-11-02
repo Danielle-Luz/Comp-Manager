@@ -238,17 +238,17 @@ export async function createCompanyModal () {
   const inputName = document.createElement("input");
   const inputDescription = document.createElement("input");
   const selectCompany = document.createElement("select");
-  const editButton = document.createElement("button");
+  const createButton = document.createElement("button");
 
   modalContentContainer.classList = "d-flex flex-column modal-content full-width form-1";
   modalTitle.classList = "title-1";
   inputDescription.classList = "full-width input-1";
   inputName.classList = "full-width input-1";
   selectCompany.classList = "full-width input-1";
-  editButton.classList = "button button-brand";
+  createButton.classList = "button button-brand";
 
   modalTitle.innerText = "Criar departamento";
-  editButton.innerText = "Editar";
+  createButton.innerText = "Criar o departamento";
 
   inputName.placeholder = "Nome do departamento";
   inputDescription.placeholder = "Descrição";
@@ -317,7 +317,7 @@ export async function createCompanyModal () {
     }, 5000);
   });
 
-  modalContentContainer.append(modalTitle, inputName, inputDescription, selectCompany, editButton);
+  modalContentContainer.append(modalTitle, inputName, inputDescription, selectCompany, createButton);
 
   createModal(modalContentContainer);
 }
@@ -383,7 +383,7 @@ export async function deleteDepartmentModal (id, name) {
 
   modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
   modalTitle.classList = "title-3";
-  deleteButton.classList = "button button-brand full-width toast-sucess";
+  deleteButton.classList = "button button-sucess full-width";
 
   modalTitle.innerText = `Realmente deseja deletar o departamento ${name} e demitir seus funcionários?`;
   deleteButton.innerText = "Confirmar";
@@ -511,7 +511,7 @@ export async function deleteUserModal (id, username) {
 
   modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
   modalTitle.classList = "title-3";
-  deleteButton.classList = "button button-brand full-width toast-sucess";
+  deleteButton.classList = "button button-sucess full-width";
 
   modalTitle.innerText = `Realmente deseja deletar o usuário ${username}?`;
   deleteButton.innerText = "Confirmar";
@@ -533,7 +533,7 @@ export async function deleteUserModal (id, username) {
       removeModalWithAnimation(".modal");
       
       renderAllCards(users, "#users-list", createUserCard);
-      
+
       if (usersList.querySelector(".organization-card") == null) {
         usersList.innerHTML = `
         <div class="align-center d-flex justify-center full-height full-width">
