@@ -255,6 +255,8 @@ export async function deleteDepartment (id) {
   });
 
   return response;
+}
+
 export async function getCompanySectors (id) {
   const token = localStorage.getItem("token");
 
