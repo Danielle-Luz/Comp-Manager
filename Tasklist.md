@@ -26,6 +26,7 @@
     2. Editar departamento - ok
     3. Remover departamento/usuário - ok
     4. Funcionários do departamento
+      1. Mostrar empty message caso não haja nenhum
     5. Estilizações
       1. Modais devem desaparecer após clique do botão, os toasts devem durar mais
       2. Animação dos modais

@@ -288,3 +288,7 @@ export function createUserCard ({uuid, username, professional_level, kind_of_wor
 
   return card;
 }
+
+export function createHiredCard ({username, professional_level, company_name}) {
+
+}

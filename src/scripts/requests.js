@@ -337,3 +337,19 @@ export async function deleteUser (id) {
 
   return response;
 }
+
+export async function getNotHiredUsers () {
+  const token = localStorage.getItem("token");
+  
+  const response = await fetch(`${baseUrl}/admin/out_of_work`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  const users = await response.json();
+
+  return users;
+}

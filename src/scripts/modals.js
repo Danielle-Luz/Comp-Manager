@@ -1,6 +1,6 @@
-import { createDepartment, deleteDepartment, deleteUser, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers } from "./requests.js";
+import { createDepartment, deleteDepartment, deleteUser, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers, getNotHiredUsers } from "./requests.js";
 import { createToast } from "./popups.js";
-import { createUserCard, renderAllCards, renderByOption, setUserInfo } from "./render.js";
+import { createHiredCard, createUserCard, renderAllCards, renderByOption, setUserInfo } from "./render.js";
 
 export async function createModal (modalContent) {
   const modalWrapper = document.createElement("div");
@@ -31,7 +31,7 @@ export async function createModal (modalContent) {
   document.body.insertAdjacentElement("afterbegin", modalWrapper);
 }
 
-export async function createHiredModal (modalContent) {
+export async function createHiredModal (uuid) {
   const modalWrapper = document.createElement("div");
   const modal = document.createElement("article");
   const closeButton = document.createElement("button");
@@ -48,8 +48,11 @@ export async function createHiredModal (modalContent) {
   const hireButton = document.createElement("button");
   const usersSection = document.createElement("section");
 
-  const users = await getAllUsers();
-  createSelectOptions(selectUser, users);
+  const notHiredUsers = await getNotHiredUsers();
+
+  notHiredUsers.forEach( ({username, uuid}) => {
+    selectUser.insertAdjacentHTML("beforeend", `<option data-id=${uuid}>${username}</option>`);
+  });
 
   modalWrapper.classList = "align-center d-flex full-width full-height justify-center modal-wrapper";
   modal.classList = "align-center d-flex flex-column full-width full-height justify-center modal-2";
@@ -79,6 +82,15 @@ export async function createHiredModal (modalContent) {
     modalWrapper.remove();
   });
 
+  selectWrapper.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const selectedOption = selectUser.options[selectUser.selectedIndex];
+    const userId = selectedOption.getAttribute("data-id");
+
+    const response = 
+  });
+
   modalInfo.append(descriptionTitle, companyParagraph);
   selectWrapper.append(selectUser, hireButton);
   modalText.append(modalInfo, selectWrapper);
@@ -90,6 +102,11 @@ export async function createHiredModal (modalContent) {
   modalWrapper.appendChild(modal);
 
   document.body.insertAdjacentElement("afterbegin", modalWrapper);
+
+  let employees = await getAllUsers();
+  employees = employees.filter(({department_uuid}) => department_uuid == uuid);
+
+  renderAllCards(employees, ".hired-section", createHiredCard)
 }
 
 export async function editLoggetUserModal ({username, email}) {
