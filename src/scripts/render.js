@@ -361,6 +361,8 @@ export function createHiredCard ({uuid, username, professional_level, company_na
 
       selectNotHired.innerHTML = "";
 
+      notHiredUsers.unshift({username: "Selecionar usuário", uuid: null});
+
       notHiredUsers.forEach( ({username, uuid}) => {
         selectNotHired.insertAdjacentHTML("beforeend", `<option data-id=${uuid}>${username}</option>`);
       });

@@ -60,6 +60,9 @@
 
 .modal-content-2 .title-4 {
   margin-bottom: 0.6875rem;
+}
+
+.modal-text {
   text-align: center;
 }
 
@@ -85,21 +88,18 @@
   }
   
   .modal-text {
+    align-items: flex-start;
     flex-direction: row;
+    text-align: start;
   }
   
   .modal-wrapper .title-1 {
     text-align: start;
   }
-
   
   .modal-content-2 .button-sucess {
     text-align: end;
     width: fit-content;
-  }
-
-  .modal-text {
-    align-items: flex-end;
   }
 
 }

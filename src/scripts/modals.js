@@ -50,6 +50,8 @@ export async function createHiredModal (departmentName, departmentDescription, d
 
   const notHiredUsers = await getNotHiredUsers();
 
+  notHiredUsers.unshift({username: "Selecionar usuário", uuid: null});
+
   notHiredUsers.forEach( ({username, uuid}) => {
     selectUser.insertAdjacentHTML("beforeend", `<option data-id=${uuid}>${username}</option>`);
   });
@@ -93,37 +95,40 @@ export async function createHiredModal (departmentName, departmentDescription, d
     event.preventDefault();
 
     const selectedOption = selectUser.options[selectUser.selectedIndex];
-    const userId = selectedOption.getAttribute("data-id");
 
-    const response = await hireUser(userId, departmentId);
-    let toast;
-
-    if (response.ok) {
-      let employees = await getAllUsers();
-      employees = employees.filter(({department_uuid}) => department_uuid == departmentId);
-      employees = employees.map(employee => {
-        return {
-          ...employee, 
-          company_name: companyName
-        }
-      });
+    if (selectedOption.innerText != "Selecionar usuário") {
+      const userId = selectedOption.getAttribute("data-id");
   
-      toast = createToast("Funcionário contratado com sucesso", "sucess");
-
-      selectUser.options.remove(selectUser.selectedIndex);
-
-      renderAllCards(employees, ".hired-section", createHiredCard)
-    } else {
-      toast = createToast("Não foi possível contratar o funcionário", "alert");
-    }
-
-    document.body.insertAdjacentElement("afterbegin", toast);
+      const response = await hireUser(userId, departmentId);
+      let toast;
+  
+      if (response.ok) {
+        let employees = await getAllUsers();
+        employees = employees.filter(({department_uuid}) => department_uuid == departmentId);
+        employees = employees.map(employee => {
+          return {
+            ...employee, 
+            company_name: companyName
+          }
+        });
     
-    setTimeout(() => {
+        toast = createToast("Funcionário contratado com sucesso", "sucess");
+  
+        selectUser.options.remove(selectUser.selectedIndex);
+  
+        renderAllCards(employees, ".hired-section", createHiredCard)
+      } else {
+        toast = createToast("Não foi possível contratar o funcionário", "alert");
+      }
+  
+      document.body.insertAdjacentElement("afterbegin", toast);
+      
       setTimeout(() => {
-        toast.remove();
-      }, 500);
-    }, 5000);
+        setTimeout(() => {
+          toast.remove();
+        }, 500);
+      }, 5000);
+    }
   });
 
   modalInfo.append(descriptionTitle, companyParagraph);
@@ -295,26 +300,28 @@ export async function createCompanyModal () {
       }
     })
 
-    const response = await createDepartment(data);
-    let toast;
-
-    if (response.ok) {
-      toast = createToast("Departamento criado com sucesso", "sucess");
-
-      await renderByOption();
-
-      removeModalWithAnimation(".modal");
-    } else {
-      toast = createToast("O departamento já pertence a essa empresa", "alert");
-    }
-
-    document.body.insertAdjacentElement("afterbegin", toast);
-    
-    setTimeout(() => {
+    if (data.company_uuid) {
+      const response = await createDepartment(data);
+      let toast;
+  
+      if (response.ok) {
+        toast = createToast("Departamento criado com sucesso", "sucess");
+  
+        await renderByOption();
+  
+        removeModalWithAnimation(".modal");
+      } else {
+        toast = createToast("O departamento já pertence a essa empresa", "alert");
+      }
+  
+      document.body.insertAdjacentElement("afterbegin", toast);
+      
       setTimeout(() => {
-        toast.remove();
-      }, 500);
-    }, 5000);
+        setTimeout(() => {
+          toast.remove();
+        }, 500);
+      }, 5000);
+    }
   });
 
   modalContentContainer.append(modalTitle, inputName, inputDescription, selectCompany, createButton);
@@ -436,8 +443,8 @@ export async function editUserModal (professional_level, kind_of_work, id) {
 
   modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
   modalTitle.classList = "title-1";
-  selectWork.classList = "full-width input-1 text-4";
-  selectLevel.classList = "full-width input-1 text-4";
+  selectWork.classList = "full-width input-1";
+  selectLevel.classList = "full-width input-1";
   editButton.classList = "button button-brand full-width";
 
   modalTitle.innerText = "Editar Usuário";
