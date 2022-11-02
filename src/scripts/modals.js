@@ -524,13 +524,22 @@ export async function deleteUserModal (id, username) {
     let toast;
 
     if (response.ok) {
+      const usersList = document.getElementById("users-list");
+          
       const users = await getAllUsers();
       
       toast = createToast("Usuário excluído com sucesso", "sucess");
-
+      
       removeModalWithAnimation(".modal");
-
+      
       renderAllCards(users, "#users-list", createUserCard);
+      
+      if (usersList.querySelector(".organization-card") == null) {
+        usersList.innerHTML = `
+        <div class="align-center d-flex justify-center full-height full-width">
+          <h2 class="title-1">Nenhum usuário cadastrado.</h2>
+        </div>`;
+      }
     } else {
       toast = createToast("Não foi possível excluir o usuário", "alert");
     }

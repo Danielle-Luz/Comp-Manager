@@ -301,18 +301,8 @@ export function createUserCard ({uuid, username, professional_level, kind_of_wor
     editUserModal(professional_level, kind_of_work, uuid);
   });
 
-  buttonDelete.addEventListener("click", () => {
-    deleteUserModal(uuid, username);
-    
-    const usersList = document.getElementById("users-list");
-
-    if (usersList.querySelector(".organization-card") == null) {
-    
-      usersList.innerHTML = `
-      <div class="align-center d-flex justify-center full-height full-width">
-        <h2 class="title-1">Nenhum usuário cadastrado.</h2>
-      </div>`;
-    }
+  buttonDelete.addEventListener("click", async () => {
+    await deleteUserModal(uuid, username);
   });
 
   buttonGroup.append(buttonEdit, buttonDelete);
