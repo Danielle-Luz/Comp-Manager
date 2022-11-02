@@ -1,4 +1,4 @@
-import { createDepartment, deleteDepartment, editDepartment, editLoggedUser, getAllCompanies } from "./requests.js";
+import { createDepartment, deleteDepartment, editDepartment, editLoggedUser, editUser, getAllCompanies } from "./requests.js";
 import { createToast } from "./popups.js";
 import { renderByOption, setUserInfo } from "./render.js";
 
@@ -248,6 +248,133 @@ export async function editDepartmentModal (description, id) {
 }
 
 export async function deleteDepartmentModal (id, name) {
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const deleteButton = document.createElement("button");
+
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-3";
+  deleteButton.classList = "button button-brand full-width toast-sucess";
+
+  modalTitle.innerText = `Realmente deseja deletar o departamento ${name} e demitir seus funcionários?`;
+  deleteButton.innerText = "Confirmar";
+
+  modalContentContainer.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const response = await deleteDepartment(id);
+
+    let toast;
+
+    if (response.ok) {
+      toast = createToast("Departamento excluído com sucesso", "sucess");
+
+      await renderByOption();
+    } else {
+      toast = createToast("Não foi possível excluir o departamento", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        document.body.removeChild(document.querySelector(".modal-wrapper"));
+      }, 500);
+    }, 5000);
+  });
+
+  modalContentContainer.append(modalTitle, deleteButton);
+
+  createModal(modalContentContainer);
+}
+
+
+export async function editUserModal (professional_level, kind_of_work) {
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const selectWork = document.createElement("select");
+  const selectLevel = document.createElement("select");
+  const editButton = document.createElement("button");
+
+  const typeOfWork = ["home office", "presencial", "hibrido"];
+  const levels = ["estágio", "júnior", "pleno", "sênior"];
+
+  createSelectOptions(selectWork, typeOfWork);
+  createSelectOptions(selectLevel, levels);
+
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-1";
+  selectWork.classList = "full-width input-1 text-4";
+  selectLevel.classList = "full-width input-1 text-4";
+  editButton.classList = "button button-brand full-width";
+
+  modalTitle.innerText = "Editar Usuário";
+  editButton.innerText = "Editar";
+
+  selectWork.selectedIndex = typeOfWork.findIndex( work => work == kind_of_work);
+
+  selectLevel.selectedIndex = levels.findIndex( level => level == professional_level);
+
+  selectWork.name = "kind_of_work";
+
+  selectLevel.name = "professional_level";
+
+  selectWork.setAttribute("required", "true");
+
+  selectLevel.setAttribute("required", "true");
+
+  modalContentContainer.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const selects = modalContentContainer.querySelectorAll("select");
+
+    let data = {};
+
+    selects.forEach( ({name, value}) => {
+      data = {
+        ...data,
+        [name]: value
+      }
+    });
+
+    const response = await editUser(id, data);
+    let toast;
+
+    if (response.ok) {
+      toast = createToast("Usuário editado com sucesso", "sucess");
+
+      await renderByOption();
+    } else {
+      toast = createToast("Não foi possível editar o usuário", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        document.body.removeChild(document.querySelector(".modal-wrapper"));
+      }, 500);
+    }, 5000);
+  });
+
+  modalContentContainer.append(modalTitle, selectWork, selectLevel, editButton);
+
+  createModal(modalContentContainer);
+}
+
+function createSelectOptions (select, list) {
+  list.forEach( info => {
+    const option = `<option value="${info}">${info}</option>`;
+
+    select.insertAdjacentHTML("beforeend", option);
+  });
+}
+
+export async function deleteUserModal (id, name) {
   const modalContentContainer = document.createElement("form");
   const modalTitle = document.createElement("h2");
   const deleteButton = document.createElement("button");

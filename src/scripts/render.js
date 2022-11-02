@@ -1,4 +1,4 @@
-import { deleteDepartmentModal, editDepartmentModal } from "./modals.js";
+import { deleteDepartmentModal, editDepartmentModal, editUserModal } from "./modals.js";
 import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
@@ -237,7 +237,7 @@ export async function setUserInfo () {
   typeOfWork.innerText = userInfo.kind_of_work || "";
 }
 
-export function createUserCard ({uuid, username, professional_level, department_name}) {
+export function createUserCard ({uuid, username, professional_level, kind_of_work, department_name}) {
   const card = document.createElement("li");
   const usernameTitle = document.createElement("h3");
   const levelSpan = document.createElement("span");
@@ -275,7 +275,7 @@ export function createUserCard ({uuid, username, professional_level, department_
   buttonDelete.appendChild(buttonDeleteIcon);
 
   buttonEdit.addEventListener("click", () => {
-    
+    editUserModal(professional_level, kind_of_work);
   });
 
   buttonDelete.addEventListener("click", () => {

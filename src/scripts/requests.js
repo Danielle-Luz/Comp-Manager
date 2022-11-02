@@ -309,3 +309,31 @@ export async function getAllUsers () {
 
   return users;
 }
+
+export async function editUser (id, data) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/admin/update_user/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  return response;
+}
+
+export async function deleteUser (id) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/admin/delete_user/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  return response;
+}
