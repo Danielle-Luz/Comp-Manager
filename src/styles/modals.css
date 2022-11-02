@@ -12,22 +12,26 @@
 .modal {
   animation: drop ease 0.5s;
   background-color: var(--color-white);
-  padding: 2rem 2.5rem;
+  max-width: 423px;
+  padding: 2rem 2rem;
 }
 
-
 .modal-content {
-  min-width: 423px;
   padding: 0;
 }
 
 .modal-2 {
   animation: drop ease 0.5s;
   background-color: var(--color-white);
+  height: max-content;
   max-width: 857px;
-  height: 560px;
+  min-height: 560px;
   padding: 0;
   width: 100%;
+}
+
+.modal-alert {
+  max-width: 623px;
 }
 
 .modal-2 .close-modal {
@@ -39,8 +43,8 @@
   padding: 0;
 }
 
-.title-1,
-.modal-text {
+.modal-2 .title-1,
+.modal-2 .modal-text {
   padding-inline: 1.5rem;
 }
 
@@ -56,6 +60,7 @@
 
 .modal-content-2 .title-4 {
   margin-bottom: 0.6875rem;
+  text-align: center;
 }
 
 .modal-content-2 .input-1 {
@@ -70,6 +75,10 @@
   margin-bottom: 1.5rem;
 }
 
+.modal-content-2 .button-sucess {
+  text-align: center;
+}
+
 @media (min-width: 595px) {
   .modal-2 {
     margin: 10px;
@@ -79,9 +88,20 @@
     flex-direction: row;
   }
   
-  .modal-content-2 .title-1 {
+  .modal-wrapper .title-1 {
     text-align: start;
   }
+
+  
+  .modal-content-2 .button-sucess {
+    text-align: end;
+    width: fit-content;
+  }
+
+  .modal-text {
+    align-items: flex-end;
+  }
+
 }
 
 @keyframes drop {

@@ -9,7 +9,7 @@ export async function createModal (modalContent) {
   const buttonIcon = document.createElement("img");
 
   modalWrapper.classList = "align-center d-flex full-width full-height justify-center modal-wrapper";
-  modal.classList = "align-center d-flex flex-column justify-center modal";
+  modal.classList = "align-center d-flex flex-column full-width justify-center modal";
   closeButton.classList = "close-modal self-end";
   buttonIcon.classList = "button-icon";
 
@@ -71,7 +71,7 @@ export async function createHiredModal (departmentName, departmentDescription, d
   companyParagraph.classList = "text-4";
   selectWrapper.classList = "align-end d-flex flex-column form-group full-width";
   selectUser.classList = "full-width input-1";
-  hireButton.classList = "button button-sucess fit-width self-end";
+  hireButton.classList = "button button-sucess full-width self-end";
   usersSection.classList = "d-flex hired-section";
 
   closeButton.setAttribute("aria-label", "fechar modal");
@@ -381,7 +381,7 @@ export async function deleteDepartmentModal (id, name) {
   const modalTitle = document.createElement("h2");
   const deleteButton = document.createElement("button");
 
-  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1 fit-content";
   modalTitle.classList = "title-3";
   deleteButton.classList = "button button-sucess full-width";
 
@@ -417,6 +417,8 @@ export async function deleteDepartmentModal (id, name) {
   modalContentContainer.append(modalTitle, deleteButton);
 
   createModal(modalContentContainer);
+
+  document.querySelector(".modal").classList.add("modal-alert");
 }
 
 export async function editUserModal (professional_level, kind_of_work, id) {
