@@ -353,3 +353,30 @@ export async function getNotHiredUsers () {
 
   return users;
 }
+
+export async function hireUser (userId, departmentId) {
+  const token = localStorage.getItem("token");
+
+  const data = {
+    "user_uuid": userId,
+    "department_uuid": departmentId
+  };
+  
+  const response = await sendDataWithToken("/departments/hire/", data);
+
+  return response;
+}
+
+export async function fireUser (userId) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/departments/dismiss/${userId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+
+  return response;
+}
