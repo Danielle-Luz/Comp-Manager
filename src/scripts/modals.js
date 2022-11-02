@@ -31,6 +31,64 @@ export async function createModal (modalContent) {
   document.body.insertAdjacentElement("afterbegin", modalWrapper);
 }
 
+export async function createHiredModal (modalContent) {
+  const modalWrapper = document.createElement("div");
+  const modal = document.createElement("article");
+  const closeButton = document.createElement("button");
+  const buttonIcon = document.createElement("img");
+
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const modalText = document.createElement("div");
+  const modalInfo = document.createElement("div");
+  const descriptionTitle = document.createElement("h3");
+  const companyParagraph = document.createElement("p");
+  const selectWrapper = document.createElement("form");
+  const selectUser = document.createElement("select");
+  const hireButton = document.createElement("button");
+  const usersSection = document.createElement("section");
+
+  modalWrapper.classList = "align-center d-flex full-width full-height justify-center modal-wrapper";
+  modal.classList = "align-center d-flex flex-column full-width full-height justify-center modal-2";
+  closeButton.classList = "close-modal self-end";
+  buttonIcon.classList = "button-icon";
+
+  modalContentContainer.classList = "d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-1";
+  modalText.classList = "align-center d-flex flex-column full-width modal-text justify-between";
+  descriptionTitle.classList = "title-4";
+  companyParagraph.classList = "text-4";
+  selectWrapper.classList = "align-end d-flex flex-column form-group full-width";
+  selectUser.classList = "full-width input-1";
+  hireButton.classList = "button button-sucess fit-width self-end";
+  usersSection.classList = "d-flex hired-section";
+
+  closeButton.setAttribute("aria-label", "fechar modal");
+  selectUser.setAttribute("required", "true");
+  selectUser.setAttribute("name", "user_uuid");
+
+  buttonIcon.src = "../../assets/imgs/close.svg";
+  buttonIcon.alt = "desenho de 'x'";
+
+  closeButton.appendChild(buttonIcon);
+
+  closeButton.addEventListener("click", () => {
+    modalWrapper.remove();
+  });
+
+  modalInfo.append(descriptionTitle, companyParagraph);
+  selectWrapper.append(selectUser, hireButton);
+  modalText.append(modalInfo, selectWrapper);
+
+  modalContentContainer.append(modalTitle, modalText, usersSection);
+
+  modal.append(closeButton, modalContentContainer);
+
+  modalWrapper.appendChild(modal);
+
+  document.body.insertAdjacentElement("afterbegin", modalWrapper);
+}
+
 export async function editLoggetUserModal ({username, email}) {
   const modalContentContainer = document.createElement("form");
   const modalTitle = document.createElement("h2");
