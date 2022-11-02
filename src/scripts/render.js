@@ -232,3 +232,55 @@ export async function setUserInfo () {
   professionalLevel.innerText = userInfo.professional_level || "";
   typeOfWork.innerText = userInfo.kind_of_work || "";
 }
+
+function createSectorCard ({uuid, username, professional_level, department_name}) {
+  const card = document.createElement("li");
+  const usernameTitle = document.createElement("h3");
+  const levelSpan = document.createElement("span");
+  const departmentSpan = document.createElement("span");
+  const buttonGroup = document.createElement("div");
+  const buttonEdit = document.createElement("button");
+  const buttonEditIcon = document.createElement("img");
+  const buttonDelete = document.createElement("button");
+  const buttonDeleteIcon = document.createElement("img");
+
+  card.classList = "d-flex flex-column full-width organization-card";
+  usernameTitle.classList = "title-4";
+  levelSpan.classList = "text-4";
+  departmentSpan.classList = "text-4";
+  buttonGroup.classList = "d-flex full-width justify-center button-group";
+  buttonEdit.classList = "button-icon";
+  buttonDelete.classList = "button-icon";
+
+  buttonEdit.setAttribute("aria-label", "editar usuário")
+  buttonDelete.setAttribute("aria-label", "deletar usuário")
+
+  usernameTitle.innerText = username;
+  levelSpan.innerText = professional_level;
+  departmentSpan.innerText = department_name;
+  
+  card.setAttribute("data-id", uuid);
+
+  buttonEditIcon.src = "../../assets/imgs/purple-pencil.svg";
+  buttonDeleteIcon.src = "../../assets/imgs/black-trash.svg";
+  
+  buttonEditIcon.alt = "ícone de lápis roxo";
+  buttonDeleteIcon.alt = "ícone de lixeira preta";
+
+  buttonEdit.appendChild(buttonEditIcon);
+  buttonDelete.appendChild(buttonDeleteIcon);
+
+  buttonEdit.addEventListener("click", () => {
+    
+  });
+
+  buttonDelete.addEventListener("click", () => {
+    
+  });
+
+  buttonGroup.append(buttonEdit, buttonDelete);
+
+  card.append(usernameTitle, levelSpan, departmentSpan, buttonGroup);
+
+  return card;
+}
