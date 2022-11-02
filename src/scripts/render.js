@@ -194,11 +194,9 @@ function createSectorCard ({uuid, name, description, companies:{name:companyName
 export async function renderByOption () {
   const select = document.getElementById("company-names");
 
-  const options = [...select.querySelectorAll("option")];
-
   const company = select.value;
   
-  const selectedOption = options.find( option => option.innerText == company);
+  const selectedOption = select.options[select.selectedIndex];
 
   const id = selectedOption.getAttribute("data-id");
 
