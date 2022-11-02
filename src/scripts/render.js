@@ -58,7 +58,7 @@ export function createCoworkCard({username, professional_level}) {
   const coworkerCard = `
   <li class="card-employee d-flex flex-column">
     <h3 class="title-5">${username}</h3>
-    <span class="text-4">${professional_level}</span>
+    <span class="text-4">${professional_level || ""}</span>
   </li>
   `;
 
