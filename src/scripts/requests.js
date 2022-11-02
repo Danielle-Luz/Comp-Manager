@@ -1,4 +1,5 @@
 import { createToast } from "./popups.js";
+import { hideToast } from "./render.js";
 
 const baseUrl = "http://localhost:6278";
 
@@ -72,23 +73,17 @@ export async function createUser (data) {
   if (response.ok) {
     toast = createToast("Criação de usuário<br>bem-sucedida", "sucess");
 
-    setTimeout(() => {
+    toast.addEventListener("animationend", () => {
       window.location.assign("../login/index.html");
-    }, 5500);
+    })
   } else {
     toast = createToast("E-mail já cadastrado", "alert");
   }
 
   document.body.appendChild(toast);
   
-  setTimeout(() => {
-    toast.style.animationName = "hide";
-
-    setTimeout(() => {
-      document.body.removeChild(toast);
-    }, 480);
-  }, 5000);
 }
+
 
 export async function login (data) {
   let toast;
@@ -110,13 +105,7 @@ export async function login (data) {
     
     document.body.appendChild(toast);
     
-    setTimeout(() => {
-      toast.style.animationName = "hide";
-  
-      setTimeout(() => {
-        document.body.removeChild(toast);
-      }, 500);
-    }, 5000);
+    hideToast();
   }
 }
 

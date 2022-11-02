@@ -1,6 +1,6 @@
 import { createDepartment, deleteDepartment, deleteUser, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers, getNotHiredUsers, hireUser } from "./requests.js";
 import { createToast } from "./popups.js";
-import { createHiredCard, createUserCard, removeModalWithAnimation, renderAllCards, renderByOption, setUserInfo } from "./render.js";
+import { createHiredCard, createUserCard, hideToast, removeModalWithAnimation, renderAllCards, renderByOption, setUserInfo } from "./render.js";
 
 export async function createModal (modalContent) {
   const modalWrapper = document.createElement("div");
@@ -123,11 +123,7 @@ export async function createHiredModal (departmentName, departmentDescription, d
   
       document.body.insertAdjacentElement("afterbegin", toast);
       
-      setTimeout(() => {
-        setTimeout(() => {
-          toast.remove();
-        }, 500);
-      }, 5000);
+      hideToast();
     }
   });
 
@@ -225,11 +221,7 @@ export async function editLoggetUserModal ({username, email}) {
 
     document.body.insertAdjacentElement("afterbegin", toast);
     
-    setTimeout(() => {
-      setTimeout(() => {
-        toast.remove();
-      }, 500);
-    }, 5000);
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, inputUsername, inputEmail, inputPassword, editButton);
@@ -316,11 +308,7 @@ export async function createCompanyModal () {
   
       document.body.insertAdjacentElement("afterbegin", toast);
       
-      setTimeout(() => {
-        setTimeout(() => {
-          toast.remove();
-        }, 500);
-      }, 5000);
+      hideToast();
     }
   });
 
@@ -371,11 +359,7 @@ export async function editDepartmentModal (description, id) {
 
     document.body.insertAdjacentElement("afterbegin", toast);
     
-    setTimeout(() => {
-      setTimeout(() => {
-        toast.remove();
-      }, 500);
-    }, 5000);
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, textareaDescription, editButton);
@@ -414,11 +398,7 @@ export async function deleteDepartmentModal (id, name) {
 
     document.body.insertAdjacentElement("afterbegin", toast);
     
-    setTimeout(() => {
-      setTimeout(() => {
-        toast.remove();
-      }, 500);
-    }, 5000);
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, deleteButton);
@@ -493,11 +473,7 @@ export async function editUserModal (professional_level, kind_of_work, id) {
 
     document.body.insertAdjacentElement("afterbegin", toast);
     
-    setTimeout(() => {
-      setTimeout(() => {
-        toast.remove();
-      }, 500);
-    }, 5000);
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, selectWork, selectLevel, editButton);
@@ -555,11 +531,7 @@ export async function deleteUserModal (id, username) {
 
     document.body.insertAdjacentElement("afterbegin", toast);
     
-    setTimeout(() => {
-      setTimeout(() => {
-        toast.remove();
-      }, 500);
-    }, 5000);
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, deleteButton);

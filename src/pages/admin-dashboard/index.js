@@ -2,6 +2,7 @@ import { createCompanyModal } from "../../scripts/modals.js";
 import { createDefaultSelectOption, createUserCard, renderAllCards, renderSectorsBySelectedCompany } from "../../scripts/render.js";
 import { getAllCompanies, getAllUsers, redirectUser } from "../../scripts/requests.js";
 
+
 await redirectUser(true, "user-dashboard");
 
 const companies = await getAllCompanies();

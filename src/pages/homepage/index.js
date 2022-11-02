@@ -1,3 +1,4 @@
+import { toggleOptions } from "../../scripts/dropdown.js";
 import { createCompanyCard, createCompanySelectOption, renderAllCards } from "../../scripts/render.js";
 import { getAllCompanies, getAllSectors } from "../../scripts/requests.js";
 
@@ -6,6 +7,8 @@ const companies = await getAllCompanies();
 const sectors = await getAllSectors();
 
 sectors.unshift({description: "Todos"}); 
+
+toggleOptions();
 
 renderAllCards(companies, ".organizations-list", createCompanyCard);
 

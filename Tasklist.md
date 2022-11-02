@@ -46,11 +46,11 @@
     1. Evitar acesso caso não haja token - ok ok
     2. Redirecionar com base no tipo de login: admin ou user? - ok
 8. Fazer com que o dropdown esteja funcional
-10. Remover usuário logado da lista de coworkers
-11. Colocar "required" em todos os campos segundo o canvas
-12. Consertar tamanho da imagem na homepage
-13. Fazer com que seção de empresas da homepage vá até o canto da página
-14. Remover timeout desnecessário dos toasts
-  1. Fazer com que desapareçam suavemente
-  2. Mudar nome do arquivo de "popups" para toasts
-15. Colocar placeholder "selecionar usuário" no select de usuários do modal hire
+10. Remover usuário logado da lista de coworkers - 
+11. Colocar "required" em todos os campos segundo o canvas - ok
+12. Consertar tamanho da imagem na homepage -
+13. Fazer com que seção de empresas da homepage vá até o canto da página -
+14. Remover timeout desnecessário dos toasts - ok
+  1. Fazer com que desapareçam suavemente - ok
+  2. Mudar nome do arquivo de "popups" para toasts -
+15. Colocar placeholder "selecionar usuário" no select de usuários do modal hire - ok

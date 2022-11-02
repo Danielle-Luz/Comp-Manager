@@ -380,11 +380,7 @@ export function createHiredCard ({uuid, username, professional_level, company_na
 
     document.body.insertAdjacentElement("afterbegin", toast);
     
-    setTimeout(() => {
-      setTimeout(() => {
-        toast.remove();
-      }, 500);
-    }, 5000);
+    hideToast();
   });
   
   buttonGroup.append(buttonFire);
@@ -406,4 +402,16 @@ export function removeModalWithAnimation (modalClass) {
   modal.addEventListener("animationend", () => {
     modalWrapper.remove();
   });
+}
+
+export function hideToast () {
+  const toast = document.querySelector(".toast");
+  
+  setTimeout(() => {
+    toast.style.animationName = "hide";
+  
+    toast.addEventListener("animationend", () => {
+      document.body.removeChild(toast);
+    });
+  }, 2000);
 }
