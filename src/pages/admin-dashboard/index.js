@@ -14,6 +14,15 @@ renderAllCards(companies, "#company-names", createDefaultSelectOption);
 
 renderAllCards(users, "#users-list", createUserCard);
 
+if (users.length == 0) {
+  const usersList = document.getElementById("users-list");
+
+  usersList.innerHTML = `
+  <div class="align-center d-flex justify-center full-height full-width">
+    <h2 class="title-1">Nenhum usuário cadastrado.</h2>
+  </div>`;
+}
+
 await renderSectorsBySelectedCompany();
 
 addCreateDepartmentEvent();

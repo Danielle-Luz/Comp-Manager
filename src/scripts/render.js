@@ -187,6 +187,15 @@ function createSectorCard ({uuid, name, description, companies:{name:companyName
 
   buttonDelete.addEventListener("click", () => {
     deleteDepartmentModal(uuid, name);
+
+    const companyList = document.getElementById("company-list");
+
+    if (companyList.querySelector(".organization-card") == null) {
+      companyList.innerHTML = `
+      <div class="align-center d-flex justify-center full-height full-width">
+        <h2 class="title-1">Nenhum departamento cadastrado.</h2>
+      </div>`;
+    }
   });
 
   buttonGroup.append(buttonEye, buttonEdit, buttonDelete);
@@ -226,6 +235,15 @@ export async function renderByOption () {
   })
 
   renderAllCards(sectors, "#company-list", createSectorCard);
+
+  if (sectors.length == 0) {
+    const companyList = document.getElementById("company-list");
+
+    companyList.innerHTML = `
+    <div class="align-center d-flex justify-center full-height full-width">
+      <h2 class="title-1">Nenhum departamento cadastrado.</h2>
+    </div>`;
+  }
 }
 
 export async function setUserInfo () {
@@ -285,6 +303,16 @@ export function createUserCard ({uuid, username, professional_level, kind_of_wor
 
   buttonDelete.addEventListener("click", () => {
     deleteUserModal(uuid, username);
+    
+    const usersList = document.getElementById("users-list");
+
+    if (usersList.querySelector(".organization-card") == null) {
+    
+      usersList.innerHTML = `
+      <div class="align-center d-flex justify-center full-height full-width">
+        <h2 class="title-1">Nenhum usuário cadastrado.</h2>
+      </div>`;
+    }
   });
 
   buttonGroup.append(buttonEdit, buttonDelete);
