@@ -272,3 +272,19 @@ export async function getCompanySectors (id) {
 
   return sectors;
 }
+
+export async function getAllUsers () {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/users`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  const users = await response.json();
+
+  return users;
+}
