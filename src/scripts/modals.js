@@ -212,6 +212,8 @@ export async function editLoggetUserModal ({username, email}) {
       toast = createToast("Usuário editado com sucesso", "sucess");
 
       await setUserInfo();
+
+      document.body.removeChild(document.querySelector(".modal-wrapper"));
     } else {
       toast = createToast("Dados já pertencentes a outro usuário", "alert");
     }
@@ -221,10 +223,6 @@ export async function editLoggetUserModal ({username, email}) {
     setTimeout(() => {
       setTimeout(() => {
         toast.remove();
-  
-        if (document.querySelector(".modal-wrapper")) {
-          document.body.removeChild(document.querySelector(".modal-wrapper"));
-        }
       }, 500);
     }, 5000);
   });
@@ -304,6 +302,8 @@ export async function createCompanyModal () {
       toast = createToast("Departamento criado com sucesso", "sucess");
 
       await renderByOption();
+
+      document.body.removeChild(document.querySelector(".modal-wrapper"));
     } else {
       toast = createToast("O departamento já pertence a essa empresa", "alert");
     }
@@ -313,10 +313,6 @@ export async function createCompanyModal () {
     setTimeout(() => {
       setTimeout(() => {
         toast.remove();
-  
-        if (document.querySelector(".modal-wrapper")) {
-          document.body.removeChild(document.querySelector(".modal-wrapper"));
-        }
       }, 500);
     }, 5000);
   });
@@ -360,6 +356,8 @@ export async function editDepartmentModal (description, id) {
       toast = createToast("Departamento editado com sucesso", "sucess");
 
       await renderByOption();
+
+      document.body.removeChild(document.querySelector(".modal-wrapper"));
     } else {
       toast = createToast("Não foi possível editar o departamento", "alert");
     }
@@ -369,10 +367,6 @@ export async function editDepartmentModal (description, id) {
     setTimeout(() => {
       setTimeout(() => {
         toast.remove();
-  
-        if (document.querySelector(".modal-wrapper")) {
-          document.body.removeChild(document.querySelector(".modal-wrapper"));
-        }
       }, 500);
     }, 5000);
   });
@@ -405,6 +399,8 @@ export async function deleteDepartmentModal (id, name) {
       toast = createToast("Departamento excluído com sucesso", "sucess");
 
       await renderByOption();
+
+      document.body.removeChild(document.querySelector(".modal-wrapper"));
     } else {
       toast = createToast("Não foi possível excluir o departamento", "alert");
     }
@@ -414,10 +410,6 @@ export async function deleteDepartmentModal (id, name) {
     setTimeout(() => {
       setTimeout(() => {
         toast.remove();
-  
-        if (document.querySelector(".modal-wrapper")) {
-          document.body.removeChild(document.querySelector(".modal-wrapper"));
-        }
       }, 500);
     }, 5000);
   });
@@ -484,6 +476,8 @@ export async function editUserModal (professional_level, kind_of_work, id) {
       toast = createToast("Usuário editado com sucesso", "sucess");
 
       renderAllCards(users, "#users-list", createUserCard);
+
+      document.body.removeChild(document.querySelector(".modal-wrapper"));
     } else {
       toast = createToast("Não foi possível editar o usuário", "alert");
     }
@@ -493,10 +487,6 @@ export async function editUserModal (professional_level, kind_of_work, id) {
     setTimeout(() => {
       setTimeout(() => {
         toast.remove();
-  
-        if (document.querySelector(".modal-wrapper")) {
-          document.body.removeChild(document.querySelector(".modal-wrapper"));
-        }
       }, 500);
     }, 5000);
   });
@@ -539,6 +529,8 @@ export async function deleteUserModal (id, username) {
       toast = createToast("Usuário excluído com sucesso", "sucess");
 
       renderAllCards(users, "#users-list", createUserCard);
+
+      document.body.removeChild(document.querySelector(".modal-wrapper"));
     } else {
       toast = createToast("Não foi possível excluir o usuário", "alert");
     }
@@ -548,10 +540,6 @@ export async function deleteUserModal (id, username) {
     setTimeout(() => {
       setTimeout(() => {
         toast.remove();
-  
-        if (document.querySelector(".modal-wrapper")) {
-          document.body.removeChild(document.querySelector(".modal-wrapper"));
-        }
       }, 500);
     }, 5000);
   });
