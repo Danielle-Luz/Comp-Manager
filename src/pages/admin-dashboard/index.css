@@ -70,6 +70,7 @@ ul.cards-container::-webkit-scrollbar-thumb {
   background-color: var(--color-grey-3);
   flex-wrap: nowrap;
   gap: 2rem;
+  height: 277px;
   margin: 0 0 1.5rem 1.5rem;
   overflow-x: auto;
   padding: 2.6875rem 2.0625rem;

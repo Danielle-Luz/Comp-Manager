@@ -321,6 +321,7 @@ export function createHiredCard ({uuid, username, professional_level, company_na
     let toast;
     
     if (response.ok) {
+      const notHiredSection = document.querySelector(".hired-section");
       const selectNotHired = document.getElementById("select-not-hired");
       const companyName = document.getElementById("company-name").innerText;
 
@@ -341,10 +342,18 @@ export function createHiredCard ({uuid, username, professional_level, company_na
       renderAllCards(employees, ".hired-section", createHiredCard);
 
       selectNotHired.innerHTML = "";
-      
+
       notHiredUsers.forEach( ({username, uuid}) => {
         selectNotHired.insertAdjacentHTML("beforeend", `<option data-id=${uuid}>${username}</option>`);
       });
+
+      if (notHiredSection.querySelector(".organization-card") == null) {
+        notHiredSection.insertAdjacentHTML("beforeend", `
+        <div class="align-center d-flex full-height full-width justify-center">
+          <h3 class="title-4">Nenhum funcionário contratado</h3>
+        </div>
+        `);
+      }
     } else {
       toast = createToast("Não foi possível demitir o funcionário", "alert");
     }

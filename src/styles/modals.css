@@ -21,6 +21,7 @@
 .modal-2 {
   background-color: var(--color-white);
   max-width: 857px;
+  height: 560px;
   padding: 0;
   width: 100%;
 }
@@ -67,7 +68,6 @@
 
 @media (min-width: 595px) {
   .modal-2 {
-    height: unset;
     margin: 10px;
   }
 

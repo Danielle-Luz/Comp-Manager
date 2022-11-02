@@ -148,6 +148,16 @@ export async function createHiredModal (departmentName, departmentDescription, d
   });
 
   renderAllCards(employees, ".hired-section", createHiredCard);
+
+  if(employees.length == 0) {
+    const notHiredSection = document.querySelector(".hired-section");
+    
+    notHiredSection.insertAdjacentHTML("beforeend", `
+    <div class="align-center d-flex full-height full-width justify-center">
+      <h3 class="title-4">Nenhum funcionário contratado</h3>
+    </div>
+    `);
+  }
 }
 
 export async function editLoggetUserModal ({username, email}) {
