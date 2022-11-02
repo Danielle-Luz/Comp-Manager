@@ -1,5 +1,5 @@
-import { deleteDepartmentModal, deleteUserModal, editDepartmentModal, editUserModal } from "./modals.js";
-import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
+import { createHiredModal, deleteDepartmentModal, deleteUserModal, editDepartmentModal, editUserModal } from "./modals.js";
+import { fireUser, getAllCompanies, getAllCompaniesBySector, getAllDepartments, getAllUsers, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
@@ -176,6 +176,10 @@ function createSectorCard ({uuid, name, description, companies:{name:companyName
   buttonEdit.appendChild(buttonEditIcon);
   buttonDelete.appendChild(buttonDeleteIcon);
 
+  buttonEye.addEventListener("click", () => {
+    createHiredModal(name, description, uuid, companyName);
+  });
+
   buttonEdit.addEventListener("click", () => {
     editDepartmentModal(description, uuid);
   });
@@ -289,6 +293,39 @@ export function createUserCard ({uuid, username, professional_level, kind_of_wor
   return card;
 }
 
-export function createHiredCard ({username, professional_level, company_name}) {
+export function createHiredCard ({uuid, username, professional_level, company_name, department_uuid: id_before}) {
+  const card = document.createElement("li");
+  const usernameTitle = document.createElement("h3");
+  const levelSpan = document.createElement("span");
+  const companySpan = document.createElement("span");
+  const buttonGroup = document.createElement("div");
+  const buttonFire = document.createElement("button");
+  
+  card.classList = "d-flex flex-column full-width organization-card";
+  usernameTitle.classList = "title-4";
+  levelSpan.classList = "text-4";
+  companySpan.classList = "text-4";
+  buttonGroup.classList = "d-flex full-width justify-center button-group";
+  buttonFire.classList = "button button-outline";
+  
+  usernameTitle.innerText = username;
+  levelSpan.innerText = professional_level;
+  companySpan.innerText = company_name;
+  buttonFire.innerText = "Desligar";
+  
+  buttonFire.addEventListener("click", async () => {
+    await fireUser(uuid);
+    
+    let employees = await getAllUsers();
+    
+    employees = employees.filter(({department_uuid}) => department_uuid == id_before);
 
+    renderAllCards(employees, ".hired-section", createHiredCard);
+  });
+  
+  buttonGroup.append(buttonFire);
+  
+  card.append(usernameTitle, levelSpan, companySpan, buttonGroup);
+  
+  return card;
 }

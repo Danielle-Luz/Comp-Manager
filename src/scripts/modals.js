@@ -31,7 +31,7 @@ export async function createModal (modalContent) {
   document.body.insertAdjacentElement("afterbegin", modalWrapper);
 }
 
-export async function createHiredModal (departmentId) {
+export async function createHiredModal (departmentName, departmentDescription, departmentId, companyName) {
   const modalWrapper = document.createElement("div");
   const modal = document.createElement("article");
   const closeButton = document.createElement("button");
@@ -53,6 +53,10 @@ export async function createHiredModal (departmentId) {
   notHiredUsers.forEach( ({username, uuid}) => {
     selectUser.insertAdjacentHTML("beforeend", `<option data-id=${uuid}>${username}</option>`);
   });
+
+  modalTitle.innerText = departmentName;
+  descriptionTitle.innerText = departmentDescription;
+  companyParagraph = companyName;
 
   modalWrapper.classList = "align-center d-flex full-width full-height justify-center modal-wrapper";
   modal.classList = "align-center d-flex flex-column full-width full-height justify-center modal-2";
@@ -92,6 +96,9 @@ export async function createHiredModal (departmentId) {
     let toast;
 
     if (response.ok) {
+      let employees = await getAllUsers();
+      employees = employees.filter(({department_uuid}) => department_uuid == departmentId);
+  
       toast = createToast("Funcionário contratado com sucesso", "sucess");
 
       selectUser.options.remove(selectUser.selectedIndex);
