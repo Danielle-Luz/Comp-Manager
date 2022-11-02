@@ -1,4 +1,4 @@
-import { createDepartment, deleteDepartment, deleteUser, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers, getNotHiredUsers } from "./requests.js";
+import { createDepartment, deleteDepartment, deleteUser, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers, getNotHiredUsers, hireUser } from "./requests.js";
 import { createToast } from "./popups.js";
 import { createHiredCard, createUserCard, renderAllCards, renderByOption, setUserInfo } from "./render.js";
 
@@ -31,7 +31,7 @@ export async function createModal (modalContent) {
   document.body.insertAdjacentElement("afterbegin", modalWrapper);
 }
 
-export async function createHiredModal (uuid) {
+export async function createHiredModal (departmentId) {
   const modalWrapper = document.createElement("div");
   const modal = document.createElement("article");
   const closeButton = document.createElement("button");
@@ -88,7 +88,30 @@ export async function createHiredModal (uuid) {
     const selectedOption = selectUser.options[selectUser.selectedIndex];
     const userId = selectedOption.getAttribute("data-id");
 
-    const response = 
+    const response = await hireUser(userId, departmentId);
+    let toast;
+
+    if (response.ok) {
+      toast = createToast("Funcionário contratado com sucesso", "sucess");
+
+      selectUser.options.remove(selectUser.selectedIndex);
+
+      renderAllCards(employees, ".hired-section", createHiredCard)
+    } else {
+      toast = createToast("Não foi possível contratar o funcionário", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
+      }, 500);
+    }, 5000);
   });
 
   modalInfo.append(descriptionTitle, companyParagraph);
@@ -104,9 +127,9 @@ export async function createHiredModal (uuid) {
   document.body.insertAdjacentElement("afterbegin", modalWrapper);
 
   let employees = await getAllUsers();
-  employees = employees.filter(({department_uuid}) => department_uuid == uuid);
+  employees = employees.filter(({department_uuid}) => department_uuid == departmentId);
 
-  renderAllCards(employees, ".hired-section", createHiredCard)
+  renderAllCards(employees, ".hired-section", createHiredCard);
 }
 
 export async function editLoggetUserModal ({username, email}) {
