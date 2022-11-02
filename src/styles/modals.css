@@ -18,6 +18,18 @@
   padding: 0;
 }
 
+.modal-2 {
+  background-color: var(--color-white);
+  max-width: 857px;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.modal-content-2 {
+  max-width: 100%;
+  padding: 0;
+}
+
 .modal-content .title-2 {
   margin-bottom: 1.25rem;
 }
@@ -26,4 +38,20 @@
   line-height: 150%;
   margin-block: 1.5rem 2.375rem;
   text-align: center;
+}
+
+.modal-content-2 .title-4 {
+  margin-bottom: 0.6875rem;
+}
+
+.modal-content-2 .input-1 {
+  margin-bottom: 0.875rem;
+}
+
+.modal-content-2 .button {
+  text-align: end;
+}
+
+.modal-content-2 .title-1 {
+  text-align: start;
 }

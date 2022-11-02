@@ -62,6 +62,32 @@ ul.cards-container::-webkit-scrollbar-thumb {
   text-align: center;
 }
 
+.form-group {
+  max-width: 302px;
+}
+
+.hired-section {
+  background-color: var(--color-grey-3);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 2.6875rem 2.0625rem;
+}
+
+.form-1 .hired-section .text-4 {
+  margin-bottom: 0;
+}
+
+.hired-section .organization-card {
+  max-width: 306px;
+}
+
+.hired-section .button-outline {
+  border-color: var(--color-alert);
+  color: var(--color-alert);
+  margin-top: 16px;
+}
+
 @media (min-width: 800px) {
   main {
     margin-block: 4.5rem;
