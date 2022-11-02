@@ -275,7 +275,7 @@ export function createUserCard ({uuid, username, professional_level, kind_of_wor
   buttonDelete.appendChild(buttonDeleteIcon);
 
   buttonEdit.addEventListener("click", () => {
-    editUserModal(professional_level, kind_of_work);
+    editUserModal(professional_level, kind_of_work, uuid);
   });
 
   buttonDelete.addEventListener("click", () => {

@@ -1,6 +1,6 @@
-import { createDepartment, deleteDepartment, editDepartment, editLoggedUser, editUser, getAllCompanies } from "./requests.js";
+import { createDepartment, deleteDepartment, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers } from "./requests.js";
 import { createToast } from "./popups.js";
-import { renderByOption, setUserInfo } from "./render.js";
+import { createUserCard, renderAllCards, renderByOption, setUserInfo } from "./render.js";
 
 export async function createModal (modalContent) {
   const modalWrapper = document.createElement("div");
@@ -93,7 +93,9 @@ export async function editLoggetUserModal ({username, email}) {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
@@ -183,7 +185,9 @@ export async function createCompanyModal () {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
@@ -237,7 +241,9 @@ export async function editDepartmentModal (description, id) {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
@@ -280,7 +286,9 @@ export async function deleteDepartmentModal (id, name) {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
@@ -291,7 +299,7 @@ export async function deleteDepartmentModal (id, name) {
 }
 
 
-export async function editUserModal (professional_level, kind_of_work) {
+export async function editUserModal (professional_level, kind_of_work, id) {
   const modalContentContainer = document.createElement("form");
   const modalTitle = document.createElement("h2");
   const selectWork = document.createElement("select");
@@ -343,9 +351,11 @@ export async function editUserModal (professional_level, kind_of_work) {
     let toast;
 
     if (response.ok) {
+      const users = await getAllUsers();
+
       toast = createToast("Usuário editado com sucesso", "sucess");
 
-      await renderByOption();
+      renderAllCards(users, "#users-list", createUserCard);
     } else {
       toast = createToast("Não foi possível editar o usuário", "alert");
     }
@@ -356,7 +366,9 @@ export async function editUserModal (professional_level, kind_of_work) {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
@@ -407,7 +419,9 @@ export async function deleteUserModal (id, name) {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
