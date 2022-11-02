@@ -114,10 +114,6 @@ export async function createHiredModal (departmentName, departmentDescription, d
     setTimeout(() => {
       setTimeout(() => {
         toast.remove();
-  
-        if (document.querySelector(".modal-wrapper")) {
-          document.body.removeChild(document.querySelector(".modal-wrapper"));
-        }
       }, 500);
     }, 5000);
   });
@@ -136,6 +132,12 @@ export async function createHiredModal (departmentName, departmentDescription, d
 
   let employees = await getAllUsers();
   employees = employees.filter(({department_uuid}) => department_uuid == departmentId);
+  employees = employees.map(employee => {
+    return {
+      ...employee, 
+      company_name: companyName
+    }
+  });
 
   renderAllCards(employees, ".hired-section", createHiredCard);
 }

@@ -1,4 +1,5 @@
 import { createHiredModal, deleteDepartmentModal, deleteUserModal, editDepartmentModal, editUserModal } from "./modals.js";
+import { createToast } from "./popups.js";
 import { fireUser, getAllCompanies, getAllCompaniesBySector, getAllDepartments, getAllUsers, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
@@ -293,39 +294,56 @@ export function createUserCard ({uuid, username, professional_level, kind_of_wor
   return card;
 }
 
-export function createHiredCard ({uuid, username, professional_level, department_name, department_uuid: id_before}) {
+export function createHiredCard ({uuid, username, professional_level, company_name, department_uuid: id_before}) {
   const card = document.createElement("li");
   const usernameTitle = document.createElement("h3");
   const levelSpan = document.createElement("span");
-  const departmentSpan = document.createElement("span");
+  const companySpan = document.createElement("span");
   const buttonGroup = document.createElement("div");
   const buttonFire = document.createElement("button");
   
   card.classList = "d-flex flex-column full-width organization-card";
   usernameTitle.classList = "title-4";
   levelSpan.classList = "text-4";
-  departmentSpan.classList = "text-4";
+  companySpan.classList = "text-4";
   buttonGroup.classList = "d-flex full-width justify-center button-group";
   buttonFire.classList = "button button-outline";
   
   usernameTitle.innerText = username;
   levelSpan.innerText = professional_level;
-  departmentSpan.innerText = department_name;
+  companySpan.innerText = company_name;
   buttonFire.innerText = "Desligar";
+
+  buttonFire.setAttribute("type", "button");
   
   buttonFire.addEventListener("click", async () => {
-    await fireUser(uuid);
+    const response = await fireUser(uuid);
+    let toast;
     
-    let employees = await getAllUsers();
-    
-    employees = employees.filter(({department_uuid}) => department_uuid == id_before);
+    if (response.ok) {
+      let employees = await getAllUsers();
+      
+      employees = employees.filter(({department_uuid}) => department_uuid == id_before);
 
-    renderAllCards(employees, ".hired-section", createHiredCard);
+      toast = createToast("Funcionário demitido com sucesso", "sucess");
+      
+      renderAllCards(employees, ".hired-section", createHiredCard);
+    } else {
+      toast = createToast("Não foi possível demitir o funcionário", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+      }, 500);
+    }, 5000);
   });
   
   buttonGroup.append(buttonFire);
   
-  card.append(usernameTitle, levelSpan, departmentSpan, buttonGroup);
+  card.append(usernameTitle, levelSpan, companySpan, buttonGroup);
   
   return card;
 }
