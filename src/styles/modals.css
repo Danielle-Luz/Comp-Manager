@@ -1,5 +1,5 @@
 .modal-wrapper {
-  animation: show ease 0.3s;
+  animation: show ease 0.5s;
   background-color: var(--color-opacity-3);
   position: fixed;
   z-index: 100;
@@ -91,5 +91,15 @@
 
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes drop-reverse {
+  0% {
+    transform: translateY(0);
+  }
+  
+  100% {
+    transform: translateY(-1000px);
   }
 }

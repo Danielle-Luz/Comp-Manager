@@ -12,7 +12,7 @@
 }
 
 .organization-card {
-  animation: show-card ease 0.5s;
+  animation: show-card ease 1s;
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-brand-1);
   flex-shrink: 0;
@@ -23,7 +23,7 @@
 
 @keyframes show-card {
   0% {
-    transform: translateY(150px);
+    transform: translateY(-150px);
   }
   
   100% {
