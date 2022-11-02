@@ -209,10 +209,14 @@ export async function renderByOption () {
 
   window.addEventListener("resize", () => {
     const companyList = document.getElementById("company-list");
+    const usersList = document.getElementById("users-list");
+
     if(window.matchMedia("(min-width: 1160px)").matches && companyList.querySelector(".organization-card") != null) {
       companyList.classList.remove("align-center");
+      usersList.classList.remove("align-center");
     } else {
       companyList.classList.add("align-center");
+      usersList.classList.add("align-center");
     }
   })
 
