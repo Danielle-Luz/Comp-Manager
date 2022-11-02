@@ -8,6 +8,11 @@ button {
   font-weight: var(--weight-1);
   padding: 0.6937rem 2.25rem;
   text-align: center;
+  transition: 0.3s;
+}
+
+.button:hover {
+  filter: grayscale(40%);
 }
 
 .button-outline {
