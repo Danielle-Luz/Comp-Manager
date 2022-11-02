@@ -1,3 +1,9 @@
+input,
+select,
+textarea {
+  outline: none;
+}
+
 .background {
   background-image: url("../assets/imgs/background.svg");
   background-position: top;
@@ -24,7 +30,6 @@
   border: 1px solid var(--color-opacity-2);
   border-radius: 0;
   font-size: var(--font-size-6);
-  outline: none;
   padding: 0.625rem;
 }
 
@@ -40,7 +45,8 @@ select {
   color: var(--color-opacity-3);
 }
 
-.input-1:focus {
+.input-1:focus,
+select:focus {
   border-color: var(--color-brand-1);
 }
 
