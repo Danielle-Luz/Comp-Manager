@@ -42,3 +42,16 @@ button {
   height: 31px;
   width: 31px;
 }
+
+.button-icon:hover img {
+  transition: 0.3s;
+}
+
+.button-icon:hover img {
+  opacity: 70%;
+}
+
+.button-icon:first-child:hover img {
+  filter: grayscale(50%);
+  opacity: 1;
+}
