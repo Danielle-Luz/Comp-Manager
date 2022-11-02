@@ -284,7 +284,26 @@ export async function getAllUsers () {
     }
   });
 
-  const users = await response.json();
+  let users = await response.json();
+
+  const departaments = await getAllDepartments();
+
+  users = users.map( user => {
+    const {department_uuid} = user;
+    let newUser = user;
+
+    if (department_uuid != null) {
+
+      const {name} = departaments.find( ({uuid}) => uuid == department_uuid);
+
+      newUser = {
+        ...user,
+        department_name: name
+      }
+    }
+
+    return newUser;
+  });
 
   return users;
 }

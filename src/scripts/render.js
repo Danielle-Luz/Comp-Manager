@@ -233,7 +233,7 @@ export async function setUserInfo () {
   typeOfWork.innerText = userInfo.kind_of_work || "";
 }
 
-function createSectorCard ({uuid, username, professional_level, department_name}) {
+function createUserCard ({uuid, username, professional_level, department_name}) {
   const card = document.createElement("li");
   const usernameTitle = document.createElement("h3");
   const levelSpan = document.createElement("span");
