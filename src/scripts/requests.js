@@ -256,3 +256,84 @@ export async function deleteDepartment (id) {
 
   return response;
 }
+
+export async function getCompanySectors (id) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/departments/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+
+  const sectors = await response.json();
+
+  return sectors;
+}
+
+export async function getAllUsers () {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/users`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  let users = await response.json();
+
+  const departaments = await getAllDepartments();
+
+  users = users.map( user => {
+    const {department_uuid} = user;
+    let newUser = user;
+
+    if (department_uuid != null) {
+
+      const {name} = departaments.find( ({uuid}) => uuid == department_uuid);
+
+      newUser = {
+        ...user,
+        department_name: name
+      }
+    }
+
+    return newUser;
+  });
+
+  users = users.filter( ({email}) => email != "admin@mail.com");
+
+  return users;
+}
+
+export async function editUser (id, data) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/admin/update_user/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  return response;
+}
+
+export async function deleteUser (id) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/admin/delete_user/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  return response;
+}

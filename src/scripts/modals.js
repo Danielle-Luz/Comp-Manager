@@ -1,6 +1,6 @@
-import { createDepartment, deleteDepartment, editDepartment, editLoggedUser, getAllCompanies } from "./requests.js";
+import { createDepartment, deleteDepartment, deleteUser, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers } from "./requests.js";
 import { createToast } from "./popups.js";
-import { renderByOption, setUserInfo } from "./render.js";
+import { createUserCard, renderAllCards, renderByOption, setUserInfo } from "./render.js";
 
 export async function createModal (modalContent) {
   const modalWrapper = document.createElement("div");
@@ -151,7 +151,9 @@ export async function editLoggetUserModal ({username, email}) {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
@@ -241,7 +243,9 @@ export async function createCompanyModal () {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
@@ -295,7 +299,9 @@ export async function editDepartmentModal (description, id) {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });
@@ -338,7 +344,143 @@ export async function deleteDepartmentModal (id, name) {
       setTimeout(() => {
         toast.remove();
   
-        document.body.removeChild(document.querySelector(".modal-wrapper"));
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
+      }, 500);
+    }, 5000);
+  });
+
+  modalContentContainer.append(modalTitle, deleteButton);
+
+  createModal(modalContentContainer);
+}
+
+export async function editUserModal (professional_level, kind_of_work, id) {
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const selectWork = document.createElement("select");
+  const selectLevel = document.createElement("select");
+  const editButton = document.createElement("button");
+
+  const typeOfWork = ["home office", "presencial", "hibrido"];
+  const levels = ["estágio", "júnior", "pleno", "sênior"];
+
+  createSelectOptions(selectWork, typeOfWork);
+  createSelectOptions(selectLevel, levels);
+
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-1";
+  selectWork.classList = "full-width input-1 text-4";
+  selectLevel.classList = "full-width input-1 text-4";
+  editButton.classList = "button button-brand full-width";
+
+  modalTitle.innerText = "Editar Usuário";
+  editButton.innerText = "Editar";
+
+  selectWork.selectedIndex = typeOfWork.findIndex( work => work == kind_of_work);
+
+  selectLevel.selectedIndex = levels.findIndex( level => level == professional_level);
+
+  selectWork.name = "kind_of_work";
+
+  selectLevel.name = "professional_level";
+
+  selectWork.setAttribute("required", "true");
+
+  selectLevel.setAttribute("required", "true");
+
+  modalContentContainer.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const selects = modalContentContainer.querySelectorAll("select");
+
+    let data = {};
+
+    selects.forEach( ({name, value}) => {
+      data = {
+        ...data,
+        [name]: value
+      }
+    });
+
+    const response = await editUser(id, data);
+    let toast;
+
+    if (response.ok) {
+      const users = await getAllUsers();
+
+      toast = createToast("Usuário editado com sucesso", "sucess");
+
+      renderAllCards(users, "#users-list", createUserCard);
+    } else {
+      toast = createToast("Não foi possível editar o usuário", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
+      }, 500);
+    }, 5000);
+  });
+
+  modalContentContainer.append(modalTitle, selectWork, selectLevel, editButton);
+
+  createModal(modalContentContainer);
+}
+
+function createSelectOptions (select, list) {
+  list.forEach( info => {
+    const option = `<option value="${info}">${info}</option>`;
+
+    select.insertAdjacentHTML("beforeend", option);
+  });
+}
+
+export async function deleteUserModal (id, username) {
+  const modalContentContainer = document.createElement("form");
+  const modalTitle = document.createElement("h2");
+  const deleteButton = document.createElement("button");
+
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalTitle.classList = "title-3";
+  deleteButton.classList = "button button-brand full-width toast-sucess";
+
+  modalTitle.innerText = `Realmente deseja deletar o usuário ${username}?`;
+  deleteButton.innerText = "Confirmar";
+
+  modalContentContainer.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const response = await deleteUser(id);
+
+    let toast;
+
+    if (response.ok) {
+      const users = await getAllUsers();
+      
+      toast = createToast("Usuário excluído com sucesso", "sucess");
+
+      renderAllCards(users, "#users-list", createUserCard);
+    } else {
+      toast = createToast("Não foi possível excluir o usuário", "alert");
+    }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    setTimeout(() => {
+      setTimeout(() => {
+        toast.remove();
+  
+        if (document.querySelector(".modal-wrapper")) {
+          document.body.removeChild(document.querySelector(".modal-wrapper"));
+        }
       }, 500);
     }, 5000);
   });

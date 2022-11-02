@@ -1,5 +1,5 @@
-import { deleteDepartmentModal, editDepartmentModal } from "./modals.js";
-import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCoworkers, getUserInfo } from "./requests.js";
+import { deleteDepartmentModal, deleteUserModal, editDepartmentModal, editUserModal } from "./modals.js";
+import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
@@ -194,11 +194,9 @@ function createSectorCard ({uuid, name, description, companies:{name:companyName
 export async function renderByOption () {
   const select = document.getElementById("company-names");
 
-  const options = [...select.querySelectorAll("option")];
-
   const company = select.value;
   
-  const selectedOption = options.find( option => option.innerText == company);
+  const selectedOption = select.options[select.selectedIndex];
 
   const id = selectedOption.getAttribute("data-id");
 
@@ -209,7 +207,18 @@ export async function renderByOption () {
     sectors = await getCompanySectors(id);
   }
 
-  document.getElementById("company-list").classList.remove("justify-center");
+  window.addEventListener("resize", () => {
+    const companyList = document.getElementById("company-list");
+    const usersList = document.getElementById("users-list");
+
+    if(window.matchMedia("(min-width: 1160px)").matches && companyList.querySelector(".organization-card") != null) {
+      companyList.classList.remove("align-center");
+      usersList.classList.remove("align-center");
+    } else {
+      companyList.classList.add("align-center");
+      usersList.classList.add("align-center");
+    }
+  })
 
   renderAllCards(sectors, "#company-list", createSectorCard);
 }
@@ -226,4 +235,56 @@ export async function setUserInfo () {
   email.innerText = userInfo.email;
   professionalLevel.innerText = userInfo.professional_level || "";
   typeOfWork.innerText = userInfo.kind_of_work || "";
+}
+
+export function createUserCard ({uuid, username, professional_level, kind_of_work, department_name}) {
+  const card = document.createElement("li");
+  const usernameTitle = document.createElement("h3");
+  const levelSpan = document.createElement("span");
+  const departmentSpan = document.createElement("span");
+  const buttonGroup = document.createElement("div");
+  const buttonEdit = document.createElement("button");
+  const buttonEditIcon = document.createElement("img");
+  const buttonDelete = document.createElement("button");
+  const buttonDeleteIcon = document.createElement("img");
+
+  card.classList = "d-flex flex-column full-width organization-card";
+  usernameTitle.classList = "title-4";
+  levelSpan.classList = "text-4";
+  departmentSpan.classList = "text-4";
+  buttonGroup.classList = "d-flex full-width justify-center button-group";
+  buttonEdit.classList = "button-icon";
+  buttonDelete.classList = "button-icon";
+
+  buttonEdit.setAttribute("aria-label", "editar usuário")
+  buttonDelete.setAttribute("aria-label", "deletar usuário")
+
+  usernameTitle.innerText = username;
+  levelSpan.innerText = professional_level;
+  departmentSpan.innerText = department_name || "";
+  
+  card.setAttribute("data-id", uuid);
+
+  buttonEditIcon.src = "../../assets/imgs/purple-pencil.svg";
+  buttonDeleteIcon.src = "../../assets/imgs/black-trash.svg";
+  
+  buttonEditIcon.alt = "ícone de lápis roxo";
+  buttonDeleteIcon.alt = "ícone de lixeira preta";
+
+  buttonEdit.appendChild(buttonEditIcon);
+  buttonDelete.appendChild(buttonDeleteIcon);
+
+  buttonEdit.addEventListener("click", () => {
+    editUserModal(professional_level, kind_of_work, uuid);
+  });
+
+  buttonDelete.addEventListener("click", () => {
+    deleteUserModal(uuid, username);
+  });
+
+  buttonGroup.append(buttonEdit, buttonDelete);
+
+  card.append(usernameTitle, levelSpan, departmentSpan, buttonGroup);
+
+  return card;
 }
