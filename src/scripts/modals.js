@@ -77,6 +77,8 @@ export async function createHiredModal (departmentName, departmentDescription, d
   closeButton.setAttribute("aria-label", "fechar modal");
   selectUser.setAttribute("required", "true");
   selectUser.setAttribute("name", "user_uuid");
+  selectUser.setAttribute("id", "select-not-hired");
+  companyParagraph.setAttribute("id", "company-name");
 
   buttonIcon.src = "../../assets/imgs/close.svg";
   buttonIcon.alt = "desenho de 'x'";
@@ -99,6 +101,12 @@ export async function createHiredModal (departmentName, departmentDescription, d
     if (response.ok) {
       let employees = await getAllUsers();
       employees = employees.filter(({department_uuid}) => department_uuid == departmentId);
+      employees = employees.map(employee => {
+        return {
+          ...employee, 
+          company_name: companyName
+        }
+      });
   
       toast = createToast("Funcionário contratado com sucesso", "sucess");
 

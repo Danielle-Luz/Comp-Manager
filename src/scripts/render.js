@@ -1,6 +1,6 @@
 import { createHiredModal, deleteDepartmentModal, deleteUserModal, editDepartmentModal, editUserModal } from "./modals.js";
 import { createToast } from "./popups.js";
-import { fireUser, getAllCompanies, getAllCompaniesBySector, getAllDepartments, getAllUsers, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
+import { fireUser, getAllCompanies, getAllCompaniesBySector, getAllDepartments, getAllUsers, getCompanySectors, getCoworkers, getNotHiredUsers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
@@ -321,13 +321,30 @@ export function createHiredCard ({uuid, username, professional_level, company_na
     let toast;
     
     if (response.ok) {
+      const selectNotHired = document.getElementById("select-not-hired");
+      const companyName = document.getElementById("company-name").innerText;
+
+      const notHiredUsers = await getNotHiredUsers();
+
       let employees = await getAllUsers();
       
       employees = employees.filter(({department_uuid}) => department_uuid == id_before);
+      employees = employees.map(employee => {
+        return {
+          ...employee, 
+          company_name: companyName
+        }
+      });
 
       toast = createToast("Funcionário demitido com sucesso", "sucess");
       
       renderAllCards(employees, ".hired-section", createHiredCard);
+
+      selectNotHired.innerHTML = "";
+      
+      notHiredUsers.forEach( ({username, uuid}) => {
+        selectNotHired.insertAdjacentHTML("beforeend", `<option data-id=${uuid}>${username}</option>`);
+      });
     } else {
       toast = createToast("Não foi possível demitir o funcionário", "alert");
     }
