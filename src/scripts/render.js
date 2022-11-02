@@ -1,4 +1,4 @@
-import { deleteDepartmentModal, editDepartmentModal, editUserModal } from "./modals.js";
+import { deleteDepartmentModal, deleteUserModal, editDepartmentModal, editUserModal } from "./modals.js";
 import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
@@ -279,7 +279,7 @@ export function createUserCard ({uuid, username, professional_level, kind_of_wor
   });
 
   buttonDelete.addEventListener("click", () => {
-    
+    deleteUserModal(uuid, username);
   });
 
   buttonGroup.append(buttonEdit, buttonDelete);

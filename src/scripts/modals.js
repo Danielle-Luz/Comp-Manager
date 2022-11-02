@@ -1,4 +1,4 @@
-import { createDepartment, deleteDepartment, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers } from "./requests.js";
+import { createDepartment, deleteDepartment, deleteUser, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers } from "./requests.js";
 import { createToast } from "./popups.js";
 import { createUserCard, renderAllCards, renderByOption, setUserInfo } from "./render.js";
 
@@ -298,7 +298,6 @@ export async function deleteDepartmentModal (id, name) {
   createModal(modalContentContainer);
 }
 
-
 export async function editUserModal (professional_level, kind_of_work, id) {
   const modalContentContainer = document.createElement("form");
   const modalTitle = document.createElement("h2");
@@ -386,7 +385,7 @@ function createSelectOptions (select, list) {
   });
 }
 
-export async function deleteUserModal (id, name) {
+export async function deleteUserModal (id, username) {
   const modalContentContainer = document.createElement("form");
   const modalTitle = document.createElement("h2");
   const deleteButton = document.createElement("button");
@@ -395,22 +394,24 @@ export async function deleteUserModal (id, name) {
   modalTitle.classList = "title-3";
   deleteButton.classList = "button button-brand full-width toast-sucess";
 
-  modalTitle.innerText = `Realmente deseja deletar o departamento ${name} e demitir seus funcionários?`;
+  modalTitle.innerText = `Realmente deseja deletar o usuário ${username}?`;
   deleteButton.innerText = "Confirmar";
 
   modalContentContainer.addEventListener("submit", async event => {
     event.preventDefault();
 
-    const response = await deleteDepartment(id);
+    const response = await deleteUser(id);
 
     let toast;
 
     if (response.ok) {
-      toast = createToast("Departamento excluído com sucesso", "sucess");
+      const users = await getAllUsers();
+      
+      toast = createToast("Usuário excluído com sucesso", "sucess");
 
-      await renderByOption();
+      renderAllCards(users, "#users-list", createUserCard);
     } else {
-      toast = createToast("Não foi possível excluir o departamento", "alert");
+      toast = createToast("Não foi possível excluir o usuário", "alert");
     }
 
     document.body.insertAdjacentElement("afterbegin", toast);
