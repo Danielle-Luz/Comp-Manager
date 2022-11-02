@@ -293,24 +293,24 @@ export function createUserCard ({uuid, username, professional_level, kind_of_wor
   return card;
 }
 
-export function createHiredCard ({uuid, username, professional_level, company_name, department_uuid: id_before}) {
+export function createHiredCard ({uuid, username, professional_level, department_name, department_uuid: id_before}) {
   const card = document.createElement("li");
   const usernameTitle = document.createElement("h3");
   const levelSpan = document.createElement("span");
-  const companySpan = document.createElement("span");
+  const departmentSpan = document.createElement("span");
   const buttonGroup = document.createElement("div");
   const buttonFire = document.createElement("button");
   
   card.classList = "d-flex flex-column full-width organization-card";
   usernameTitle.classList = "title-4";
   levelSpan.classList = "text-4";
-  companySpan.classList = "text-4";
+  departmentSpan.classList = "text-4";
   buttonGroup.classList = "d-flex full-width justify-center button-group";
   buttonFire.classList = "button button-outline";
   
   usernameTitle.innerText = username;
   levelSpan.innerText = professional_level;
-  companySpan.innerText = company_name;
+  departmentSpan.innerText = department_name;
   buttonFire.innerText = "Desligar";
   
   buttonFire.addEventListener("click", async () => {
@@ -325,7 +325,7 @@ export function createHiredCard ({uuid, username, professional_level, company_na
   
   buttonGroup.append(buttonFire);
   
-  card.append(usernameTitle, levelSpan, companySpan, buttonGroup);
+  card.append(usernameTitle, levelSpan, departmentSpan, buttonGroup);
   
   return card;
 }

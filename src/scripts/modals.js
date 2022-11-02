@@ -56,14 +56,15 @@ export async function createHiredModal (departmentName, departmentDescription, d
 
   modalTitle.innerText = departmentName;
   descriptionTitle.innerText = departmentDescription;
-  companyParagraph = companyName;
+  companyParagraph.innerText = companyName;
+  hireButton.innerText = "Contratar";
 
   modalWrapper.classList = "align-center d-flex full-width full-height justify-center modal-wrapper";
   modal.classList = "align-center d-flex flex-column full-width full-height justify-center modal-2";
   closeButton.classList = "close-modal self-end";
   buttonIcon.classList = "button-icon";
 
-  modalContentContainer.classList = "d-flex flex-column modal-content full-width form-1";
+  modalContentContainer.classList = "d-flex flex-column modal-content-2 full-width form-1 full-width";
   modalTitle.classList = "title-1";
   modalText.classList = "align-center d-flex flex-column full-width modal-text justify-between";
   descriptionTitle.classList = "title-4";

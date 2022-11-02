@@ -361,8 +361,15 @@ export async function hireUser (userId, departmentId) {
     "user_uuid": userId,
     "department_uuid": departmentId
   };
-  
-  const response = await sendDataWithToken("/departments/hire/", data);
+
+  const response = await fetch(`${baseUrl}/departments/hire/`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  })
 
   return response;
 }
