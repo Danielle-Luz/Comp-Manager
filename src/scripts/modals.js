@@ -48,6 +48,9 @@ export async function createHiredModal (modalContent) {
   const hireButton = document.createElement("button");
   const usersSection = document.createElement("section");
 
+  const users = await getAllUsers();
+  createSelectOptions(selectUser, users);
+
   modalWrapper.classList = "align-center d-flex full-width full-height justify-center modal-wrapper";
   modal.classList = "align-center d-flex flex-column full-width full-height justify-center modal-2";
   closeButton.classList = "close-modal self-end";
