@@ -1,5 +1,5 @@
 import { deleteDepartmentModal, editDepartmentModal } from "./modals.js";
-import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCoworkers, getUserInfo } from "./requests.js";
+import { getAllCompanies, getAllCompaniesBySector, getAllDepartments, getCompanySectors, getCoworkers, getUserInfo } from "./requests.js";
 
 export function renderAllCards (list, containerId, createCardFunction) {
   const container = document.querySelector(containerId);
@@ -207,7 +207,14 @@ export async function renderByOption () {
     sectors = await getCompanySectors(id);
   }
 
-  document.getElementById("company-list").classList.remove("justify-center");
+  window.addEventListener("resize", () => {
+    const companyList = document.getElementById("company-list");
+    if(window.matchMedia("(min-width: 1160px)").matches && companyList.querySelector(".organization-card") != null) {
+      companyList.classList.remove("align-center");
+    } else {
+      companyList.classList.add("align-center");
+    }
+  })
 
   renderAllCards(sectors, "#company-list", createSectorCard);
 }
