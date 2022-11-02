@@ -401,3 +401,17 @@ export function createHiredCard ({uuid, username, professional_level, company_na
   
   return card;
 }
+
+export function removeModalWithAnimation (modalClass) {
+  const modal = document.querySelector(modalClass);
+
+  const modalWrapper = document.querySelector(".modal-wrapper");
+
+  modal.style.animationName = "drop-reverse";
+
+  modalWrapper.style.animationName = "hide";
+
+  modal.addEventListener("animationend", () => {
+    modalWrapper.remove();
+  });
+}

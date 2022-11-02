@@ -1,6 +1,6 @@
 import { createDepartment, deleteDepartment, deleteUser, editDepartment, editLoggedUser, editUser, getAllCompanies, getAllUsers, getNotHiredUsers, hireUser } from "./requests.js";
 import { createToast } from "./popups.js";
-import { createHiredCard, createUserCard, renderAllCards, renderByOption, setUserInfo } from "./render.js";
+import { createHiredCard, createUserCard, removeModalWithAnimation, renderAllCards, renderByOption, setUserInfo } from "./render.js";
 
 export async function createModal (modalContent) {
   const modalWrapper = document.createElement("div");
@@ -21,7 +21,7 @@ export async function createModal (modalContent) {
   closeButton.appendChild(buttonIcon);
 
   closeButton.addEventListener("click", () => {
-    modalWrapper.remove();
+    removeModalWithAnimation(".modal");
   });
 
   modal.append(closeButton, modalContent);
@@ -86,17 +86,7 @@ export async function createHiredModal (departmentName, departmentDescription, d
   closeButton.appendChild(buttonIcon);
 
   closeButton.addEventListener("click", () => {
-    const modal = document.querySelector(".modal-2");
-
-    const modalWrapper = document.querySelector(".modal-wrapper");
-
-    modal.style.animationName = "drop-reverse";
-
-    modalWrapper.style.animationName = "hide";
-
-    modal.addEventListener("animationend", () => {
-      modalWrapper.remove();
-    })
+    removeModalWithAnimation(".modal-2");
   });
 
   selectWrapper.addEventListener("submit", async event => {
@@ -219,21 +209,11 @@ export async function editLoggetUserModal ({username, email}) {
     let toast;
 
     if (response.ok) {
-      const modal = document.querySelector(".modal");
-
-      const modalWrapper = document.querySelector(".modal-wrapper");
-
       toast = createToast("Usuário editado com sucesso", "sucess");
 
       await setUserInfo();
-      
-      modal.style.animationName = "drop-reverse";
 
-      modalWrapper.style.animationName = "hide";
-
-      modal.addEventListener("animationend", () => {
-        document.body.removeChild(modalWrapper);
-      })
+      removeModalWithAnimation(".modal");
     } else {
       toast = createToast("Dados já pertencentes a outro usuário", "alert");
     }
@@ -319,21 +299,11 @@ export async function createCompanyModal () {
     let toast;
 
     if (response.ok) {
-      const modal = document.querySelector(".modal");
-
-      const modalWrapper = document.querySelector(".modal-wrapper");
-
       toast = createToast("Departamento criado com sucesso", "sucess");
 
       await renderByOption();
 
-      modal.style.animationName = "drop-reverse";
-
-      modalWrapper.style.animationName = "hide";
-
-      modal.addEventListener("animationend", () => {
-        document.body.removeChild(modalWrapper);
-      })
+      removeModalWithAnimation(".modal");
     } else {
       toast = createToast("O departamento já pertence a essa empresa", "alert");
     }
@@ -383,21 +353,11 @@ export async function editDepartmentModal (description, id) {
     let toast;
 
     if (response.ok) {
-      const modal = document.querySelector(".modal");
-
-      const modalWrapper = document.querySelector(".modal-wrapper");
-
       toast = createToast("Departamento editado com sucesso", "sucess");
 
       await renderByOption();
 
-      modal.style.animationName = "drop-reverse";
-
-      modalWrapper.style.animationName = "hide";
-
-      modal.addEventListener("animationend", () => {
-        document.body.removeChild(modalWrapper);
-      })
+      removeModalWithAnimation(".modal");
     } else {
       toast = createToast("Não foi possível editar o departamento", "alert");
     }
@@ -436,21 +396,11 @@ export async function deleteDepartmentModal (id, name) {
     let toast;
 
     if (response.ok) {
-      const modal = document.querySelector(".modal");
-
-      const modalWrapper = document.querySelector(".modal-wrapper");
-
-      modal.style.animationName = "drop-reverse";
-
-      modalWrapper.style.animationName = "hide";
-
       toast = createToast("Departamento excluído com sucesso", "sucess");
 
       await renderByOption();
 
-      modal.addEventListener("animationend", () => {
-        document.body.removeChild(modalWrapper);
-      })
+      removeModalWithAnimation(".modal");
     } else {
       toast = createToast("Não foi possível excluir o departamento", "alert");
     }
@@ -521,23 +471,13 @@ export async function editUserModal (professional_level, kind_of_work, id) {
     let toast;
 
     if (response.ok) {
-      const modal = document.querySelector(".modal");
-
-      const modalWrapper = document.querySelector(".modal-wrapper");
-
       const users = await getAllUsers();
 
       toast = createToast("Usuário editado com sucesso", "sucess");
 
       renderAllCards(users, "#users-list", createUserCard);
 
-      modal.style.animationName = "drop-reverse";
-
-      modalWrapper.style.animationName = "hide";
-
-      modal.addEventListener("animationend", () => {
-        document.body.removeChild(modalWrapper);
-      })
+      removeModalWithAnimation(".modal");
     } else {
       toast = createToast("Não foi possível editar o usuário", "alert");
     }
@@ -584,21 +524,11 @@ export async function deleteUserModal (id, username) {
     let toast;
 
     if (response.ok) {
-      const modal = document.querySelector(".modal");
-
-      const modalWrapper = document.querySelector(".modal-wrapper");
-
       const users = await getAllUsers();
       
       toast = createToast("Usuário excluído com sucesso", "sucess");
 
-      modal.style.animationName = "drop-reverse";
-
-      modalWrapper.style.animationName = "hide";
-
-      modal.addEventListener("animationend", () => {
-        document.body.removeChild(modalWrapper);
-      })
+      removeModalWithAnimation(".modal");
 
       renderAllCards(users, "#users-list", createUserCard);
     } else {
