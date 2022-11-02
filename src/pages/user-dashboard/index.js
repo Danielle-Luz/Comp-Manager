@@ -1,7 +1,8 @@
 import { editLoggetUserModal } from "../../scripts/modals.js";
 import { setCoworkers, setUserInfo } from "../../scripts/render.js";
-import { getUserInfo } from "../../scripts/requests.js";
+import { getUserInfo, redirectUser } from "../../scripts/requests.js";
 
+await redirectUser(false, "admin-dashboard");
 
 await setUserInfo();
 

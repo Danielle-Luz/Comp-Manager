@@ -8,17 +8,19 @@ export function clearStoredData () {
   }
 }
 
-export function redirectUser () {
+export async function redirectUser (level, folder) {
   if (!localStorage.getItem("token")) {
     window.location.replace("../homepage/index.html");
+  } else {
+    await verifyUserLevel (level, folder);
   }
 }
 
-export async function verifyUserLevel (level) {
+async function verifyUserLevel (level, folder) {
  const isAdmin = (await getPermissionByToken(localStorage.getItem("token"))).is_admin;
 
  if (isAdmin != level) {
-  window.location.replace("../homepage/index.html");
+  window.location.replace(`../${folder}/index.html`);
  }
 }
 
