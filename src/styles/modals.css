@@ -21,13 +21,22 @@
 .modal-2 {
   background-color: var(--color-white);
   max-width: 857px;
-  padding: 1.5rem;
+  padding: 0;
   width: 100%;
+}
+
+.modal-2 .close-modal {
+  padding: 1.5rem;
 }
 
 .modal-content-2 {
   max-width: 100%;
   padding: 0;
+}
+
+.title-1,
+.modal-text {
+  padding-inline: 1.5rem;
 }
 
 .modal-content .title-2 {
@@ -52,6 +61,21 @@
   text-align: end;
 }
 
-.modal-content-2 .title-1 {
-  text-align: start;
+.modal-content-2 .text-4 {
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 595px) {
+  .modal-2 {
+    height: unset;
+    margin: 10px;
+  }
+
+  .modal-text {
+    flex-direction: row;
+  }
+  
+  .modal-content-2 .title-1 {
+    text-align: start;
+  }
 }

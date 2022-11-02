@@ -69,9 +69,18 @@ ul.cards-container::-webkit-scrollbar-thumb {
 .hired-section {
   background-color: var(--color-grey-3);
   flex-wrap: nowrap;
-  overflow-x: auto;
   gap: 2rem;
+  margin: 0 0 1.5rem 1.5rem;
+  overflow-x: auto;
   padding: 2.6875rem 2.0625rem;
+}
+
+.hired-section::-webkit-scrollbar {
+  height: 9px;
+}
+
+.hired-section::-webkit-scrollbar-thumb {
+  background-color: var(--color-brand-1);
 }
 
 .form-1 .hired-section .text-4 {
