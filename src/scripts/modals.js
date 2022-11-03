@@ -169,6 +169,8 @@ export async function editLoggetUserModal ({username, email}) {
   const inputPassword = document.createElement("input");
   const editButton = document.createElement("button");
 
+  const oldValues = [username, email];
+
   modalContentContainer.classList = "d-flex flex-column modal-content full-width form-1";
   modalTitle.classList = "title-1";
   inputEmail.classList = "full-width input-1";
@@ -197,8 +199,8 @@ export async function editLoggetUserModal ({username, email}) {
 
     let data = {};
 
-    fields.forEach(({name, value}) => {
-      if (value) {
+    fields.forEach(({name, value}, index) => {
+      if (value && value != oldValues[index]) {
         data = {
           ...data,
           [name]: value
@@ -206,22 +208,24 @@ export async function editLoggetUserModal ({username, email}) {
       } 
     })
 
-    const response = await editLoggedUser(data);
-    let toast;
-
-    if (response.ok) {
-      toast = createToast("Usuário editado com sucesso", "sucess");
-
-      await setUserInfo();
-
-      removeModalWithAnimation(".modal");
-    } else {
-      toast = createToast("Dados já pertencentes a outro usuário", "alert");
+    if (Object.keys(data).length != 0) {
+      const response = await editLoggedUser(data);
+      let toast;
+  
+      if (response.ok) {
+        toast = createToast("Usuário editado com sucesso", "sucess");
+  
+        await setUserInfo();
+  
+        removeModalWithAnimation(".modal");
+      } else {
+        toast = createToast("Dados já pertencentes a outro usuário", "alert");
+      }
+  
+      document.body.insertAdjacentElement("afterbegin", toast);
+      
+      hideToast();
     }
-
-    document.body.insertAdjacentElement("afterbegin", toast);
-    
-    hideToast();
   });
 
   modalContentContainer.append(modalTitle, inputUsername, inputEmail, inputPassword, editButton);
