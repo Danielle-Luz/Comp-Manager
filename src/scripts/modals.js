@@ -419,8 +419,8 @@ export async function editUserModal (professional_level, kind_of_work, id) {
   const selectLevel = document.createElement("select");
   const editButton = document.createElement("button");
 
-  const typeOfWork = ["home office", "presencial", "hibrido"];
-  const levels = ["estágio", "júnior", "pleno", "sênior"];
+  const typeOfWork = ["Selecionar modalidade de trabalho ", "home office", "presencial", "hibrido"];
+  const levels = ["Selecionar nível profissional", "estágio", "júnior", "pleno", "sênior"];
 
   createSelectOptions(selectWork, typeOfWork);
   createSelectOptions(selectLevel, levels);
@@ -434,17 +434,12 @@ export async function editUserModal (professional_level, kind_of_work, id) {
   modalTitle.innerText = "Editar Usuário";
   editButton.innerText = "Editar";
 
-  selectWork.selectedIndex = typeOfWork.findIndex( work => work == kind_of_work);
-
-  selectLevel.selectedIndex = levels.findIndex( level => level == professional_level);
+  selectWork.selectedIndex = typeOfWork.findIndex( work => work == kind_of_work) != -1 ? typeOfWork.findIndex( work => work == kind_of_work) != -1 : 0;
+  selectLevel.selectedIndex = levels.findIndex( level => level == professional_level) != -1 ? levels.findIndex( level => level == professional_level) : 0;
 
   selectWork.name = "kind_of_work";
 
   selectLevel.name = "professional_level";
-
-  selectWork.setAttribute("required", "true");
-
-  selectLevel.setAttribute("required", "true");
 
   modalContentContainer.addEventListener("submit", async event => {
     event.preventDefault();
@@ -454,40 +449,48 @@ export async function editUserModal (professional_level, kind_of_work, id) {
     let data = {};
 
     selects.forEach( ({name, value}) => {
-      data = {
-        ...data,
-        [name]: value
+      if (value) {
+        data = {
+          ...data,
+          [name]: value
+        }
       }
     });
-
-    const response = await editUser(id, data);
     let toast;
 
-    if (response.ok) {
-      const users = await getAllUsers();
-
-      toast = createToast("Usuário editado com sucesso", "sucess");
-
-      renderAllCards(users, "#users-list", createUserCard);
-
-      removeModalWithAnimation(".modal");
+    if (Object.keys(data).length != 0) {
+      const response = await editUser(id, data);
+  
+      if (response.ok) {
+        const users = await getAllUsers();
+  
+        toast = createToast("Usuário editado com sucesso", "sucess");
+  
+        renderAllCards(users, "#users-list", createUserCard);
+  
+        removeModalWithAnimation(".modal");
+      } else {
+        toast = createToast("Não foi possível editar o usuário", "alert");
+      }
+  
     } else {
-      toast = createToast("Não foi possível editar o usuário", "alert");
+      toast = createToast("Selecione uma opção em pelo menos um campo", "alert");
     }
-
-    document.body.insertAdjacentElement("afterbegin", toast);
     
+    document.body.insertAdjacentElement("afterbegin", toast);
+
     hideToast();
   });
 
   modalContentContainer.append(modalTitle, selectWork, selectLevel, editButton);
 
   createModal(modalContentContainer);
+
 }
 
 function createSelectOptions (select, list) {
-  list.forEach( info => {
-    const option = `<option value="${info}">${info}</option>`;
+  list.forEach( (info, index) => {
+    const option = `<option value="${index != 0 ? info : ""}">${info}</option>`;
 
     select.insertAdjacentHTML("beforeend", option);
   });
