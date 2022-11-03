@@ -96,11 +96,12 @@ export async function createHiredModal (departmentName, departmentDescription, d
 
     const selectedOption = selectUser.options[selectUser.selectedIndex];
 
+    let toast;
+
     if (selectedOption.innerText != "Selecionar usuário") {
       const userId = selectedOption.getAttribute("data-id");
   
       const response = await hireUser(userId, departmentId);
-      let toast;
   
       if (response.ok) {
         let employees = await getAllUsers();
@@ -120,11 +121,12 @@ export async function createHiredModal (departmentName, departmentDescription, d
       } else {
         toast = createToast("Não foi possível contratar o funcionário", "alert");
       }
-  
-      document.body.insertAdjacentElement("afterbegin", toast);
-      
-      hideToast();
+    } else {
+      toast = createToast("Selecione um funcionário para contratar", "alert");
     }
+    document.body.insertAdjacentElement("afterbegin", toast);
+
+    hideToast();
   });
 
   modalInfo.append(descriptionTitle, companyParagraph);
@@ -208,9 +210,10 @@ export async function editLoggetUserModal ({username, email}) {
       } 
     })
 
+    let toast;
+
     if (Object.keys(data).length != 0) {
       const response = await editLoggedUser(data);
-      let toast;
   
       if (response.ok) {
         toast = createToast("Usuário editado com sucesso", "sucess");
@@ -221,11 +224,13 @@ export async function editLoggetUserModal ({username, email}) {
       } else {
         toast = createToast("Dados já pertencentes a outro usuário", "alert");
       }
-  
-      document.body.insertAdjacentElement("afterbegin", toast);
-      
-      hideToast();
+    } else {
+      toast = createToast("Nenhum dado foi modificado", "sucess");
     }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, inputUsername, inputEmail, inputPassword, editButton);
@@ -296,9 +301,10 @@ export async function createCompanyModal () {
       }
     })
 
+    let toast;
+
     if (data.company_uuid) {
       const response = await createDepartment(data);
-      let toast;
   
       if (response.ok) {
         toast = createToast("Departamento criado com sucesso", "sucess");
@@ -309,11 +315,14 @@ export async function createCompanyModal () {
       } else {
         toast = createToast("O departamento já pertence a essa empresa", "alert");
       }
-  
-      document.body.insertAdjacentElement("afterbegin", toast);
-      
-      hideToast();
+
+    } else {
+      toast = createToast("Selecione uma empresa", "alert");
     }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, inputName, inputDescription, selectCompany, createButton);
