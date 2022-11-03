@@ -498,7 +498,7 @@ export async function deleteUserModal (id, username) {
   const modalTitle = document.createElement("h2");
   const deleteButton = document.createElement("button");
 
-  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1 fit-content";
   modalTitle.classList = "title-3";
   deleteButton.classList = "button button-sucess full-width";
 
@@ -541,6 +541,8 @@ export async function deleteUserModal (id, username) {
   modalContentContainer.append(modalTitle, deleteButton);
 
   createModal(modalContentContainer);
+
+  document.querySelector(".modal").classList.add("modal-alert");
 }
 
 
