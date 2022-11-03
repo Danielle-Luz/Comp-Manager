@@ -96,11 +96,12 @@ export async function createHiredModal (departmentName, departmentDescription, d
 
     const selectedOption = selectUser.options[selectUser.selectedIndex];
 
+    let toast;
+
     if (selectedOption.innerText != "Selecionar usuário") {
       const userId = selectedOption.getAttribute("data-id");
   
       const response = await hireUser(userId, departmentId);
-      let toast;
   
       if (response.ok) {
         let employees = await getAllUsers();
@@ -120,11 +121,12 @@ export async function createHiredModal (departmentName, departmentDescription, d
       } else {
         toast = createToast("Não foi possível contratar o funcionário", "alert");
       }
-  
-      document.body.insertAdjacentElement("afterbegin", toast);
-      
-      hideToast();
+    } else {
+      toast = createToast("Selecione um funcionário para contratar", "alert");
     }
+    document.body.insertAdjacentElement("afterbegin", toast);
+
+    hideToast();
   });
 
   modalInfo.append(descriptionTitle, companyParagraph);
@@ -208,9 +210,10 @@ export async function editLoggetUserModal ({username, email}) {
       } 
     })
 
+    let toast;
+
     if (Object.keys(data).length != 0) {
       const response = await editLoggedUser(data);
-      let toast;
   
       if (response.ok) {
         toast = createToast("Usuário editado com sucesso", "sucess");
@@ -221,11 +224,13 @@ export async function editLoggetUserModal ({username, email}) {
       } else {
         toast = createToast("Dados já pertencentes a outro usuário", "alert");
       }
-  
-      document.body.insertAdjacentElement("afterbegin", toast);
-      
-      hideToast();
+    } else {
+      toast = createToast("Nenhum dado foi modificado", "sucess");
     }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, inputUsername, inputEmail, inputPassword, editButton);
@@ -296,9 +301,10 @@ export async function createCompanyModal () {
       }
     })
 
+    let toast;
+
     if (data.company_uuid) {
       const response = await createDepartment(data);
-      let toast;
   
       if (response.ok) {
         toast = createToast("Departamento criado com sucesso", "sucess");
@@ -309,11 +315,14 @@ export async function createCompanyModal () {
       } else {
         toast = createToast("O departamento já pertence a essa empresa", "alert");
       }
-  
-      document.body.insertAdjacentElement("afterbegin", toast);
-      
-      hideToast();
+
+    } else {
+      toast = createToast("Selecione uma empresa", "alert");
     }
+
+    document.body.insertAdjacentElement("afterbegin", toast);
+    
+    hideToast();
   });
 
   modalContentContainer.append(modalTitle, inputName, inputDescription, selectCompany, createButton);
@@ -419,8 +428,8 @@ export async function editUserModal (professional_level, kind_of_work, id) {
   const selectLevel = document.createElement("select");
   const editButton = document.createElement("button");
 
-  const typeOfWork = ["home office", "presencial", "hibrido"];
-  const levels = ["estágio", "júnior", "pleno", "sênior"];
+  const typeOfWork = ["Selecionar modalidade de trabalho ", "home office", "presencial", "hibrido"];
+  const levels = ["Selecionar nível profissional", "estágio", "júnior", "pleno", "sênior"];
 
   createSelectOptions(selectWork, typeOfWork);
   createSelectOptions(selectLevel, levels);
@@ -434,17 +443,12 @@ export async function editUserModal (professional_level, kind_of_work, id) {
   modalTitle.innerText = "Editar Usuário";
   editButton.innerText = "Editar";
 
-  selectWork.selectedIndex = typeOfWork.findIndex( work => work == kind_of_work);
-
-  selectLevel.selectedIndex = levels.findIndex( level => level == professional_level);
+  selectWork.selectedIndex = typeOfWork.findIndex( work => work == kind_of_work) != -1 ? typeOfWork.findIndex( work => work == kind_of_work) != -1 : 0;
+  selectLevel.selectedIndex = levels.findIndex( level => level == professional_level) != -1 ? levels.findIndex( level => level == professional_level) : 0;
 
   selectWork.name = "kind_of_work";
 
   selectLevel.name = "professional_level";
-
-  selectWork.setAttribute("required", "true");
-
-  selectLevel.setAttribute("required", "true");
 
   modalContentContainer.addEventListener("submit", async event => {
     event.preventDefault();
@@ -454,40 +458,48 @@ export async function editUserModal (professional_level, kind_of_work, id) {
     let data = {};
 
     selects.forEach( ({name, value}) => {
-      data = {
-        ...data,
-        [name]: value
+      if (value) {
+        data = {
+          ...data,
+          [name]: value
+        }
       }
     });
-
-    const response = await editUser(id, data);
     let toast;
 
-    if (response.ok) {
-      const users = await getAllUsers();
-
-      toast = createToast("Usuário editado com sucesso", "sucess");
-
-      renderAllCards(users, "#users-list", createUserCard);
-
-      removeModalWithAnimation(".modal");
+    if (Object.keys(data).length != 0) {
+      const response = await editUser(id, data);
+  
+      if (response.ok) {
+        const users = await getAllUsers();
+  
+        toast = createToast("Usuário editado com sucesso", "sucess");
+  
+        renderAllCards(users, "#users-list", createUserCard);
+  
+        removeModalWithAnimation(".modal");
+      } else {
+        toast = createToast("Não foi possível editar o usuário", "alert");
+      }
+  
     } else {
-      toast = createToast("Não foi possível editar o usuário", "alert");
+      toast = createToast("Selecione uma opção em pelo menos um campo", "alert");
     }
-
-    document.body.insertAdjacentElement("afterbegin", toast);
     
+    document.body.insertAdjacentElement("afterbegin", toast);
+
     hideToast();
   });
 
   modalContentContainer.append(modalTitle, selectWork, selectLevel, editButton);
 
   createModal(modalContentContainer);
+
 }
 
 function createSelectOptions (select, list) {
-  list.forEach( info => {
-    const option = `<option value="${info}">${info}</option>`;
+  list.forEach( (info, index) => {
+    const option = `<option value="${index != 0 ? info : ""}">${info}</option>`;
 
     select.insertAdjacentHTML("beforeend", option);
   });
@@ -498,7 +510,7 @@ export async function deleteUserModal (id, username) {
   const modalTitle = document.createElement("h2");
   const deleteButton = document.createElement("button");
 
-  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1";
+  modalContentContainer.classList = "align-start d-flex flex-column modal-content full-width form-1 fit-content";
   modalTitle.classList = "title-3";
   deleteButton.classList = "button button-sucess full-width";
 
@@ -541,6 +553,8 @@ export async function deleteUserModal (id, username) {
   modalContentContainer.append(modalTitle, deleteButton);
 
   createModal(modalContentContainer);
+
+  document.querySelector(".modal").classList.add("modal-alert");
 }
 
 
